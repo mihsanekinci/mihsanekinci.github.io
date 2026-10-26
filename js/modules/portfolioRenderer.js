@@ -1,0 +1,294 @@
+/**
+ * @fileoverview Dinamik Portfolyo Bileşenleri Render Motoru.
+ * Single Responsibility: siteData verilerini ve canlı GitHub API istatistiklerini
+ * alarak Bento Highlights, Deneyim/Eğitim Zaman Çizelgesi, Proje Kartları ve
+ * Teknik Yetkinlik (Skill) Kartlarını güvenli ve semantik biçimde DOM'a render eder.
+ */
+
+/**
+ * Metin içeriklerini güvenli HTML string'ine dönüştürür (XSS koruması).
+ *
+ * @param {string} raw - Ham metin
+ * @returns {string} Kaçış karakterleri uygulanmış güvenli metin
+ */
+function escapeHtml(raw) {
+    if (raw === null || raw === undefined) {
+        return '';
+    }
+    return String(raw)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+/**
+ * Çok dilli (string veya { tr, en } nesnesi) bir alanı seçilen dile göre çözer.
+ *
+ * @param {string|Object} field - Çözümlenecek veri alanı
+ * @param {'tr'|'en'} lang - Aktif dil kodu
+ * @returns {string}
+ */
+function resolveLocalizedField(field, lang) {
+    if (!field) {
+        return '';
+    }
+    if (typeof field === 'string') {
+        return field;
+    }
+    if (typeof field === 'object') {
+        return field[lang] || field.tr || field.en || '';
+    }
+    return String(field);
+}
+
+export class PortfolioRenderer {
+    /**
+     * @param {Object} siteData - Merkezi portfolyo veri nesnesi
+     * @param {Object} [selectors]
+     * @param {string} [selectors.bentoList='#bentoHighlightsList']
+     * @param {string} [selectors.timeline='#timelineContainer']
+     * @param {string} [selectors.projects='#projectsGrid']
+     * @param {string} [selectors.skills='#skillsGrid']
+     */
+    constructor(
+        siteData,
+        {
+            bentoList = '#bentoHighlightsList',
+            timeline = '#timelineContainer',
+            projects = '#projectsGrid',
+            skills = '#skillsGrid'
+        } = {}
+    ) {
+        this.siteData = siteData;
+        this.selectors = {
+            bentoList,
+            timeline,
+            projects,
+            skills
+        };
+    }
+
+    /**
+     * Tüm dinamik bölümleri tek seferde render eder.
+     *
+     * @param {'tr'|'en'} lang - Aktif dil kodu
+     * @param {string} [filterCategory='all'] - Aktif proje kategori filtresi
+     * @param {Map<string, Object>} [githubStatsMap=new Map()] - GitHub repo istatistik haritası
+     */
+    renderAll(lang, filterCategory = 'all', githubStatsMap = new Map()) {
+        this.renderBentoHighlights(lang);
+        this.renderTimeline(lang);
+        this.renderProjects(lang, filterCategory, githubStatsMap);
+        this.renderSkills(lang);
+    }
+
+    /**
+     * #bentoHighlightsList içine siteData.i18n[lang].about.bentoHighlights maddelerini <li> olarak render eder.
+     *
+     * @param {'tr'|'en'} lang - Aktif dil kodu
+     */
+    renderBentoHighlights(lang) {
+        const container = document.querySelector(this.selectors.bentoList);
+        if (!container) {
+            return;
+        }
+
+        const langData = this.siteData?.i18n?.[lang] || this.siteData?.i18n?.tr;
+        const highlights = langData?.about?.bentoHighlights;
+
+        if (!Array.isArray(highlights)) {
+            container.innerHTML = '';
+            return;
+        }
+
+        container.innerHTML = highlights
+            .map((item) => `<li>${escapeHtml(item)}</li>`)
+            .join('');
+    }
+
+    /**
+     * #timelineContainer içine siteData.timeline öğelerini .timeline-item kartları olarak render eder.
+     *
+     * @param {'tr'|'en'} lang - Aktif dil kodu
+     */
+    renderTimeline(lang) {
+        const container = document.querySelector(this.selectors.timeline);
+        if (!container) {
+            return;
+        }
+
+        const items = this.siteData?.timeline;
+        if (!Array.isArray(items)) {
+            container.innerHTML = '';
+            return;
+        }
+
+        container.innerHTML = items
+            .map((item) => {
+                const period = escapeHtml(resolveLocalizedField(item.period, lang));
+                const role = escapeHtml(resolveLocalizedField(item.role, lang));
+                const organization = escapeHtml(resolveLocalizedField(item.organization, lang));
+                const location = escapeHtml(resolveLocalizedField(item.location, lang));
+                const description = escapeHtml(resolveLocalizedField(item.description, lang));
+                const itemType = escapeHtml(item.type || 'experience');
+
+                const tagsHtml = Array.isArray(item.tags)
+                    ? item.tags
+                          .map((tag) => `<span class="tech-tag">${escapeHtml(tag)}</span>`)
+                          .join('')
+                    : '';
+
+                return `
+                    <article class="timeline-item" data-type="${itemType}">
+                        <div class="timeline-marker" aria-hidden="true"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <span class="timeline-period">${period}</span>
+                                <span class="timeline-location">📍 ${location}</span>
+                            </div>
+                            <h3 class="timeline-role">${role}</h3>
+                            <div class="timeline-org">${organization}</div>
+                            <p class="timeline-desc">${description}</p>
+                            <div class="timeline-tags project-tech">${tagsHtml}</div>
+                        </div>
+                    </article>
+                `;
+            })
+            .join('');
+    }
+
+    /**
+     * #projectsGrid içine siteData.projects öğelerini kategoriye göre filtreleyerek
+     * ve GitHub canlı istatistikleriyle zenginleştirerek .project-card olarak render eder.
+     *
+     * @param {'tr'|'en'} lang - Aktif dil kodu
+     * @param {string} [filterCategory='all'] - Kategori filtresi ('all', 'network', 'systems', 'web', 'ai')
+     * @param {Map<string, {stars: number, language: string|null, updatedAt: string, forks: number}>} [githubStatsMap=new Map()]
+     */
+    renderProjects(lang, filterCategory = 'all', githubStatsMap = new Map()) {
+        const container = document.querySelector(this.selectors.projects);
+        if (!container) {
+            return;
+        }
+
+        const allProjects = Array.isArray(this.siteData?.projects) ? this.siteData.projects : [];
+        const normalizedFilter = (filterCategory || 'all').toLowerCase();
+
+        const filteredProjects =
+            normalizedFilter === 'all'
+                ? allProjects
+                : allProjects.filter(
+                      (project) => String(project.category).toLowerCase() === normalizedFilter
+                  );
+
+        const i18n = this.siteData?.i18n?.[lang] || this.siteData?.i18n?.tr;
+        const viewCodeLabel = escapeHtml(i18n?.projects?.viewCode || 'Source Code');
+        const liveSyncNote = escapeHtml(i18n?.projects?.liveSyncNote || 'GitHub');
+
+        container.innerHTML = filteredProjects
+            .map((project) => {
+                const badge = escapeHtml(project.badge || project.category);
+                const title = escapeHtml(project.title);
+                const description = escapeHtml(resolveLocalizedField(project.description, lang));
+                const url = escapeHtml(project.url || '#');
+                const category = escapeHtml(project.category || 'all');
+
+                const repoKey = project.repo || project.id || '';
+                const ghStats =
+                    githubStatsMap instanceof Map
+                        ? githubStatsMap.get(repoKey) ||
+                          githubStatsMap.get(String(repoKey).toLowerCase())
+                        : null;
+
+                let headerStatText = 'GitHub ↗';
+                let footerMetaText = liveSyncNote;
+
+                if (ghStats) {
+                    if (ghStats.stars > 0) {
+                        headerStatText = `★ ${ghStats.stars}`;
+                    } else if (ghStats.language) {
+                        headerStatText = escapeHtml(ghStats.language);
+                    }
+
+                    const metaParts = [];
+                    if (ghStats.language) {
+                        metaParts.push(escapeHtml(ghStats.language));
+                    }
+                    if (ghStats.stars > 0) {
+                        metaParts.push(`★ ${ghStats.stars}`);
+                    }
+                    if (ghStats.forks > 0) {
+                        metaParts.push(`⑂ ${ghStats.forks}`);
+                    }
+                    if (metaParts.length > 0) {
+                        footerMetaText = metaParts.join(' · ');
+                    }
+                }
+
+                const techTagsHtml = Array.isArray(project.tech)
+                    ? project.tech
+                          .map((techItem) => `<span class="tech-tag">${escapeHtml(techItem)}</span>`)
+                          .join('')
+                    : '';
+
+                return `
+                    <article class="project-card" data-category="${category}">
+                        <div class="project-header">
+                            <span class="project-badge">${badge}</span>
+                            <span class="project-gh-stat">${headerStatText}</span>
+                        </div>
+                        <h3 class="project-title">${title}</h3>
+                        <p class="project-desc">${description}</p>
+                        <div class="project-tech">${techTagsHtml}</div>
+                        <div class="project-footer">
+                            <span class="project-repo-status">${footerMetaText}</span>
+                            <a href="${url}" target="_blank" rel="noopener noreferrer" class="project-link">${viewCodeLabel} ↗</a>
+                        </div>
+                    </article>
+                `;
+            })
+            .join('');
+    }
+
+    /**
+     * #skillsGrid içine siteData.skillCategories verilerini .skill-card olarak render eder.
+     *
+     * @param {'tr'|'en'} lang - Aktif dil kodu
+     */
+    renderSkills(lang) {
+        const container = document.querySelector(this.selectors.skills);
+        if (!container) {
+            return;
+        }
+
+        const categories = this.siteData?.skillCategories;
+        if (!Array.isArray(categories)) {
+            container.innerHTML = '';
+            return;
+        }
+
+        container.innerHTML = categories
+            .map((category) => {
+                const icon = escapeHtml(category.icon || '⚡');
+                const title = escapeHtml(resolveLocalizedField(category.title, lang));
+                const pillsHtml = Array.isArray(category.skills)
+                    ? category.skills
+                          .map((skill) => `<span class="skill-pill">${escapeHtml(skill)}</span>`)
+                          .join('')
+                    : '';
+
+                return `
+                    <article class="skill-card">
+                        <div class="skill-card-header">
+                            <span class="skill-icon" aria-hidden="true">${icon}</span>
+                            <h3 class="skill-title">${title}</h3>
+                        </div>
+                        <div class="skill-pills">${pillsHtml}</div>
+                    </article>
+                `;
+            })
+            .join('');
+    }
+}

@@ -1,0 +1,161 @@
+/**
+ * @fileoverview Application Bootstrapper & Dependency Injection Orchestrator.
+ * Single Responsibility: Veri katmanı (siteData), servis katmanı (githubService) ve
+ * UI/Uygulama modüllerini (ThemeManager, LocalizationManager, PortfolioRenderer,
+ * InteractionController) Dependency Inversion prensibiyle birleştirir ve yaşam döngüsünü yönetir.
+ */
+
+import { siteData } from './data.js';
+import { fetchUserRepos } from './services/githubService.js';
+import { ThemeManager } from './modules/themeManager.js';
+import { LocalizationManager } from './modules/localizationManager.js';
+import { PortfolioRenderer } from './modules/portfolioRenderer.js';
+import { InteractionController } from './modules/interactionController.js';
+
+class PortfolioApplication {
+    /**
+     * @param {Object} dependencies
+     * @param {Object} dependencies.data - Merkezi portfolyo verisi (siteData)
+     * @param {function(string): Promise<Map<string, Object>>} dependencies.repoFetcher - GitHub repo servisi
+     */
+    constructor({ data, repoFetcher }) {
+        this.data = data;
+        this.repoFetcher = repoFetcher;
+
+        this.activeProjectFilter = 'all';
+        /** @type {Map<string, Object>} */
+        this.githubStatsMap = new Map();
+
+        this.themeManager = new ThemeManager();
+        this.localizationManager = new LocalizationManager(this.data.i18n);
+        this.renderer = new PortfolioRenderer(this.data);
+        this.interactionController = new InteractionController({
+            siteData: this.data,
+            localizationManager: this.localizationManager
+        });
+    }
+
+    /**
+     * Uygulamayı başlatır: tema, dil, ilk dinamik render, filtre dinleyicileri ve
+     * arka plan GitHub API senkronizasyonunu çalıştırır.
+     */
+    async bootstrap() {
+        this.updateFooterYear();
+
+        // 1. Tema ve Dil motorlarını başlat
+        this.themeManager.init();
+        this.localizationManager.init();
+
+        // 2. İlk senkron bileşen render işlemi
+        const initialLang = this.localizationManager.getCurrentLanguage();
+        this.renderer.renderAll(
+            initialLang,
+            this.activeProjectFilter,
+            this.githubStatsMap
+        );
+
+        // 3. Dil değiştiğinde dinamik bileşenleri yeniden render et (Observer deseni)
+        this.localizationManager.onLanguageChange((newLang) => {
+            this.renderer.renderAll(
+                /** @type {'tr'|'en'} */ (newLang),
+                this.activeProjectFilter,
+                this.githubStatsMap
+            );
+        });
+
+        // 4. Proje kategori filtrelerini ve genel etkileşim kontrolcüsünü bağla
+        this.initProjectFilterButtons();
+        this.interactionController.init();
+
+        // 5. Arka planda canlı GitHub verilerini çek ve proje kartlarını güncelle
+        await this.syncGitHubMetadata();
+    }
+
+    /**
+     * #projectFilters altındaki kategori filtre butonlarını dinler ve aktif filtreye göre
+     * projeleri yeniden render eder.
+     */
+    initProjectFilterButtons() {
+        const filtersContainer = document.querySelector('#projectFilters');
+        if (!filtersContainer) {
+            return;
+        }
+
+        const filterButtons = filtersContainer.querySelectorAll('[data-filter]');
+        if (!filterButtons.length) {
+            return;
+        }
+
+        filtersContainer.addEventListener('click', (event) => {
+            const target = /** @type {HTMLElement|null} */ (event.target);
+            if (!target) {
+                return;
+            }
+
+            const btn = target.closest('[data-filter]');
+            if (!btn) {
+                return;
+            }
+
+            const selectedFilter = btn.getAttribute('data-filter') || 'all';
+            if (selectedFilter === this.activeProjectFilter) {
+                return;
+            }
+
+            this.activeProjectFilter = selectedFilter;
+
+            filterButtons.forEach((buttonEl) => {
+                const isActive =
+                    buttonEl.getAttribute('data-filter') === selectedFilter;
+                buttonEl.classList.toggle('active', isActive);
+                buttonEl.setAttribute('aria-pressed', String(isActive));
+            });
+
+            const currentLang = this.localizationManager.getCurrentLanguage();
+            this.renderer.renderProjects(
+                currentLang,
+                this.activeProjectFilter,
+                this.githubStatsMap
+            );
+        });
+    }
+
+    /**
+     * GitHub API üzerinden kullanıcının repo istatistiklerini çeker ve
+     * mevcut dil/filtre durumunu koruyarak proje kartlarını günceller.
+     */
+    async syncGitHubMetadata() {
+        const githubUser = this.data?.profile?.githubUser || 'mihsanekinci';
+        const statsMap = await this.repoFetcher(githubUser);
+
+        if (statsMap instanceof Map && statsMap.size > 0) {
+            this.githubStatsMap = statsMap;
+            const currentLang = this.localizationManager.getCurrentLanguage();
+            this.renderer.renderProjects(
+                currentLang,
+                this.activeProjectFilter,
+                this.githubStatsMap
+            );
+        }
+    }
+
+    /**
+     * Varsa #currentYear veya [data-current-year] elemanına güncel yılı yazar.
+     */
+    updateFooterYear() {
+        const yearEl =
+            document.querySelector('#currentYear') ||
+            document.querySelector('[data-current-year]');
+        if (yearEl) {
+            yearEl.textContent = String(new Date().getFullYear());
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const app = new PortfolioApplication({
+        data: siteData,
+        repoFetcher: fetchUserRepos
+    });
+    app.bootstrap();
+});

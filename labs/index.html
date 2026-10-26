@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiE Dev | Portfolio</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/index.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Mihsan Logo" class="navbar-logo">
+            </a>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="navLinks">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="about.html">Hakkımda</a></li>
+                <li><a href="interests.html">İlgi Alanlarım</a></li>
+                <li><a href="contact.html">İletişim</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Uygulamalar ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="grade-calc.html">📊 Not Hesaplama</a></li>
+                        <li><a href="unit-converter.html">🔄 Birim Dönüştürücü</a></li>
+                        <li><a href="hafta7.html">🎟️ Hafta 7: Etkinlik Kaydı</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+
+        <!-- Hafta 7 CTA Bölümü -->
+        <section class="h7-cta-section">
+            <div class="h7-cta-inner">
+                <div class="h7-cta-text">
+                    <span class="h7-cta-badge">🆕 Yeni</span>
+                    <h3>Hafta 7 — Bootstrap & JavaScript</h3>
+                    <p>Etkinlik kayıt sistemini Bootstrap bileşenleri ve vanilla JS ile keşfet.</p>
+                </div>
+                <a href="hafta7.html" class="btn btn-primary h7-cta-btn" id="hafta7GidBtn">
+                    🎟️ Hafta 7 Uygulamasına Git
+                </a>
+            </div>
+        </section>
+
+        <section class="hero">
+            <div class="hero-content">
+                <span class="badge">Geleceğin Mühendisi</span>
+                <h1>Mehmet İhsan Ekinci</h1>
+                <p>Marmara Üniversitesi'nde Bilgisayar Mühendisliği öğrencisiyim. Modern web teknolojileri ve
+                    <strong>ASP.NET Core</strong> ekosisteminde kendimi geliştiriyorum.
+                </p>
+                <div class="hero-btns">
+                    <a href="contact.html" class="btn btn-primary">İletişime Geç</a>
+                    <a href="about.html" class="btn btn-outline">Daha Fazla Bilgi</a>
+                </div>
+            </div>
+            <div class="hero-image-box flex-center">
+                <div class="profile-placeholder">
+                    <span>MİE</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="cards-section">
+            <div class="card">
+                <div class="card-icon">🌐</div>
+                <h3>Web Geliştirme</h3>
+            </div>
+            <div class="card">
+                <div class="card-icon">🚀</div>
+                <h3>ASP.NET Core</h3>
+            </div>
+            <div class="card">
+                <div class="card-icon">☕</div>
+                <h3>Java / Spring</h3>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎨</div>
+                <h3>Minimalist Design</h3>
+            </div>
+        </section>
+
+
+
+        <section class="grow-section">
+            <div class="box box-1 flex-center">
+                <h3>Kaizen</h3>
+                <p>Sürekli İyileşme</p>
+            </div>
+            <div class="box box-2 flex-center">
+                <h3>Ikigai</h3>
+                <p>Varoluş Nedeni</p>
+            </div>
+            <div class="box box-3 flex-center">
+                <h3>Shugyo</h3>
+                <p>Disiplinli Eğitim</p>
+            </div>
+        </section>
+
+        <footer class="main-footer flex-center">
+            <p>© 2026 - Mehmet İhsan Ekinci | Tüm Hakları Saklıdır.</p>
+        </footer>
+    </div>
+    <script src="scripts/navbar.js"></script>
+</body>
+
+</html>
