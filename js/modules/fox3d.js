@@ -1,7 +1,7 @@
 /**
  * Mehmet İhsan Ekinci — Real 3D WebGL Fox (Three.js) Controller
- * Manages 3D scene, procedural fox geometry, 360 drag rotation,
- * mouse look-at tracking, idle breathing/tail-wag, and click spin.
+ * Supports both rigged animated GLTF Fox (assets/fox.glb) with skeletal animation cycles
+ * and procedural 3D low-poly fallback, with 360 drag orbit, mouse look-at tracking, and click spin.
  */
 
 export class Fox3DController {
@@ -14,6 +14,10 @@ export class Fox3DController {
         this.targetHeadX = 0;
         this.targetHeadY = 0;
         this.spinVelocity = 0;
+        this.mixer = null;
+        this.animations = {};
+        this.currentAction = null;
+        this.gltfScene = null;
     }
 
     init() {
@@ -42,27 +46,29 @@ export class Fox3DController {
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
         // 3. Lighting
-        this.ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
+        this.ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
         this.scene.add(this.ambientLight);
 
-        this.dirLight = new THREE.DirectionalLight(0xffffff, 0.95);
+        this.dirLight = new THREE.DirectionalLight(0xffffff, 1.0);
         this.dirLight.position.set(4, 6, 4);
         this.scene.add(this.dirLight);
 
-        this.orangeRim = new THREE.PointLight(0xf97316, 0.7, 10);
+        this.orangeRim = new THREE.PointLight(0xf97316, 0.8, 10);
         this.orangeRim.position.set(-3, 2, 2);
         this.scene.add(this.orangeRim);
 
-        // 4. Model Construction
+        // 4. Model Construction (Instant procedural model)
         this.foxGroup = new THREE.Group();
         this.scene.add(this.foxGroup);
+        this.buildProceduralFox(THREE);
 
-        this.buildFox(THREE);
+        // 5. Load Animated GLB if GLTFLoader is available
+        this.loadGLTFModel(THREE);
 
-        // 5. Interaction Listeners
+        // 6. Interaction Listeners
         this.bindEvents();
 
-        // 6. Animation Loop
+        // 7. Animation Loop
         this.clock = new THREE.Clock();
         this.animate = this.animate.bind(this);
         this.animate();
@@ -70,8 +76,50 @@ export class Fox3DController {
         this.isInitialized = true;
     }
 
-    buildFox(THREE) {
-        // Materials
+    loadGLTFModel(THREE) {
+        if (!THREE.GLTFLoader) {
+            return;
+        }
+
+        const loader = new THREE.GLTFLoader();
+        loader.load(
+            'assets/fox.glb',
+            (gltf) => {
+                // Procedural modeli gizle, GLB sahnesini ekle
+                this.foxGroup.visible = false;
+
+                this.gltfScene = gltf.scene;
+                this.gltfScene.scale.set(0.016, 0.016, 0.016);
+                this.gltfScene.position.set(0, 0.1, 0);
+                this.scene.add(this.gltfScene);
+
+                // İskelet animasyonlarını kur
+                if (gltf.animations && gltf.animations.length) {
+                    this.mixer = new THREE.AnimationMixer(this.gltfScene);
+                    gltf.animations.forEach((clip) => {
+                        this.animations[clip.name] = this.mixer.clipAction(clip);
+                    });
+
+                    // Varsayılan: Survey (Merakla etrafı koklama ve bakma döngüsü)
+                    if (this.animations['Survey']) {
+                        this.animations['Survey'].play();
+                        this.currentAction = this.animations['Survey'];
+                    } else if (this.animations['Walk']) {
+                        this.animations['Walk'].play();
+                        this.currentAction = this.animations['Walk'];
+                    }
+                }
+            },
+            undefined,
+            (err) => {
+                // Hata durumunda procedürel model görünür kalır
+                console.warn('GLB fallback to procedural fox:', err);
+                this.foxGroup.visible = true;
+            }
+        );
+    }
+
+    buildProceduralFox(THREE) {
         const orangeMat = new THREE.MeshLambertMaterial({ color: 0xd85025 });
         const whiteMat = new THREE.MeshLambertMaterial({ color: 0xf4f4f5 });
         const blackMat = new THREE.MeshLambertMaterial({ color: 0x141416 });
@@ -89,31 +137,27 @@ export class Fox3DController {
         chest.position.set(0, 0.75, 0.18);
         this.foxGroup.add(chest);
 
-        // Head Group (for independent look-at rotation)
+        // Head Group
         this.headGroup = new THREE.Group();
         this.headGroup.position.set(0, 1.45, 0.15);
         this.foxGroup.add(this.headGroup);
 
-        // Head base
         const headGeo = new THREE.SphereGeometry(0.72, 12, 10);
         headGeo.scale(1.2, 0.9, 0.95);
         const head = new THREE.Mesh(headGeo, orangeMat);
         this.headGroup.add(head);
 
-        // White Muzzle / Cheeks
         const muzzleGeo = new THREE.ConeGeometry(0.68, 0.75, 10);
         muzzleGeo.rotateX(Math.PI / 2);
         const muzzle = new THREE.Mesh(muzzleGeo, whiteMat);
         muzzle.position.set(0, -0.15, 0.65);
         this.headGroup.add(muzzle);
 
-        // Nose
         const noseGeo = new THREE.SphereGeometry(0.12, 8, 8);
         const nose = new THREE.Mesh(noseGeo, blackMat);
         nose.position.set(0, -0.05, 1.05);
         this.headGroup.add(nose);
 
-        // Eyes
         const eyeGeo = new THREE.SphereGeometry(0.09, 8, 8);
         const leftEye = new THREE.Mesh(eyeGeo, blackMat);
         leftEye.position.set(-0.35, 0.08, 0.68);
@@ -123,7 +167,6 @@ export class Fox3DController {
         rightEye.position.set(0.35, 0.08, 0.68);
         this.headGroup.add(rightEye);
 
-        // Ears
         const createEar = (x, rotZ) => {
             const earG = new THREE.Group();
             const outerGeo = new THREE.ConeGeometry(0.28, 0.65, 6);
@@ -171,7 +214,6 @@ export class Fox3DController {
     }
 
     bindEvents() {
-        // Drag rotation
         this.canvas.addEventListener('pointerdown', (e) => {
             this.isDragging = true;
             this.prevMouseX = e.clientX;
@@ -187,18 +229,23 @@ export class Fox3DController {
             const mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
             const mouseY = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
 
+            const activeTarget = this.gltfScene || this.foxGroup;
+
             if (this.isDragging) {
                 const delta = e.clientX - this.prevMouseX;
-                this.foxGroup.rotation.y += delta * 0.018;
+                activeTarget.rotation.y += delta * 0.018;
                 this.prevMouseX = e.clientX;
             } else {
-                // Smooth head look-at
                 this.targetHeadY = Math.max(-0.6, Math.min(0.6, mouseX * 0.5));
                 this.targetHeadX = Math.max(-0.4, Math.min(0.4, -mouseY * 0.35));
+
+                // GLB için hafif tüm vücut açısı
+                if (this.gltfScene) {
+                    this.targetRotY = mouseX * 0.35;
+                }
             }
         });
 
-        // ResizeObserver
         if (window.ResizeObserver) {
             const ro = new ResizeObserver(() => {
                 this.handleResize();
@@ -209,6 +256,26 @@ export class Fox3DController {
 
     triggerSpin() {
         this.spinVelocity = 0.28;
+
+        // GLB animasyonu varsa kısa süre Run veya Walk animasyonuna geçiş yap
+        if (this.animations && this.animations['Run'] && this.currentAction) {
+            const prev = this.currentAction;
+            const next = this.animations['Run'];
+            next.reset();
+            next.crossFadeFrom(prev, 0.3, true);
+            next.play();
+            this.currentAction = next;
+
+            setTimeout(() => {
+                if (this.animations['Survey']) {
+                    const idle = this.animations['Survey'];
+                    idle.reset();
+                    idle.crossFadeFrom(this.currentAction, 0.4, true);
+                    idle.play();
+                    this.currentAction = idle;
+                }
+            }, 1800);
+        }
     }
 
     handleResize() {
@@ -224,32 +291,44 @@ export class Fox3DController {
         requestAnimationFrame(this.animate);
         if (!this.renderer || !this.scene || !this.camera) return;
 
+        const delta = this.clock.getDelta();
         const t = this.clock.getElapsedTime();
 
-        // Idle breathing
-        if (this.body) {
-            this.body.scale.set(
-                1 + Math.sin(t * 2) * 0.02,
-                1 + Math.cos(t * 2) * 0.02,
-                1 + Math.sin(t * 2) * 0.02
-            );
+        // 1. İskelet animasyonu güncellemesi (GLB)
+        if (this.mixer) {
+            this.mixer.update(delta);
         }
 
-        // Tail wag
-        if (this.tailGroup) {
-            this.tailGroup.rotation.y = Math.sin(t * 3.2) * 0.28;
-            this.tailGroup.rotation.z = Math.cos(t * 2.4) * 0.12;
+        // 2. Procedural model animasyonları (Fallback)
+        if (this.foxGroup.visible) {
+            if (this.body) {
+                this.body.scale.set(
+                    1 + Math.sin(t * 2) * 0.02,
+                    1 + Math.cos(t * 2) * 0.02,
+                    1 + Math.sin(t * 2) * 0.02
+                );
+            }
+
+            if (this.tailGroup) {
+                this.tailGroup.rotation.y = Math.sin(t * 3.2) * 0.28;
+                this.tailGroup.rotation.z = Math.cos(t * 2.4) * 0.12;
+            }
+
+            if (this.headGroup) {
+                this.headGroup.rotation.y += (this.targetHeadY - this.headGroup.rotation.y) * 0.08;
+                this.headGroup.rotation.x += (this.targetHeadX - this.headGroup.rotation.x) * 0.08;
+            }
         }
 
-        // Head look-at interpolation
-        if (this.headGroup) {
-            this.headGroup.rotation.y += (this.targetHeadY - this.headGroup.rotation.y) * 0.08;
-            this.headGroup.rotation.x += (this.targetHeadX - this.headGroup.rotation.x) * 0.08;
+        // 3. GLB yumuşak bakış takibi
+        if (this.gltfScene && !this.isDragging) {
+            this.gltfScene.rotation.y += (this.targetRotY - this.gltfScene.rotation.y) * 0.06;
         }
 
-        // Spin physics when clicked
+        // 4. Spin fiziği
+        const activeTarget = this.gltfScene || this.foxGroup;
         if (this.spinVelocity > 0.005) {
-            this.foxGroup.rotation.y += this.spinVelocity;
+            activeTarget.rotation.y += this.spinVelocity;
             this.spinVelocity *= 0.94;
         }
 
