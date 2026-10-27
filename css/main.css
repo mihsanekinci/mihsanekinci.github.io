@@ -417,16 +417,27 @@ button {
 }
 
 .mascot-avatar-container {
-    width: 44px;
-    height: 44px;
+    width: 58px;
+    height: 58px;
     border-radius: 4px;
     border: 1px solid var(--border-color);
-    background-color: #000;
-    overflow: visible;
+    background-color: #0a0a0b;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    cursor: grab;
+}
+
+.mascot-avatar-container:active {
+    cursor: grabbing;
+}
+
+.fox-canvas-3d {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 .mascot-avatar-container .fox-svg {

@@ -13,6 +13,7 @@ import { LocalizationManager } from './modules/localizationManager.js';
 import { PortfolioRenderer } from './modules/portfolioRenderer.js';
 import { InteractionController } from './modules/interactionController.js';
 import { MascotController } from './modules/mascotController.js';
+import { Fox3DController } from './modules/fox3d.js';
 
 class PortfolioApplication {
     /**
@@ -39,9 +40,11 @@ class PortfolioApplication {
             siteData: this.data,
             localizationManager: this.localizationManager
         });
+        this.fox3d = new Fox3DController('foxCanvas3d');
         this.mascotController = new MascotController(
             this.siteData,
-            this.localizationManager
+            this.localizationManager,
+            this.fox3d
         );
     }
 
@@ -75,9 +78,10 @@ class PortfolioApplication {
             );
         });
 
-        // 4. Proje kategori filtrelerini, genel etkileşim kontrolcüsünü ve Kitsune maskotunu bağla
+        // 4. Proje kategori filtrelerini, genel etkileşim kontrolcüsünü ve 3D Kitsune maskotunu bağla
         this.initProjectFilterButtons();
         this.interactionController.init();
+        this.fox3d.init();
         this.mascotController.init();
 
         // 5. Arka planda canlı GitHub verilerini çek ve proje satırlarını güncelle

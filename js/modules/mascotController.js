@@ -11,10 +11,11 @@ const BOUNCE_DURATION_MS = 650;
 
 export class MascotController {
     /**
-     * @param {Object} siteDataOrConfig - siteData nesnesi veya { siteData, localizationManager } yapılandırması
+     * @param {Object} siteDataOrConfig - siteData nesnesi veya { siteData, localizationManager, fox3d } yapılandırması
      * @param {import('./localizationManager.js').LocalizationManager} [localizationManagerArg] - Dil yöneticisi
+     * @param {import('./fox3d.js').Fox3DController} [fox3dArg] - 3D WebGL Tilki kontrolcüsü
      */
-    constructor(siteDataOrConfig, localizationManagerArg) {
+    constructor(siteDataOrConfig, localizationManagerArg, fox3dArg) {
         if (
             siteDataOrConfig &&
             typeof siteDataOrConfig === 'object' &&
@@ -22,9 +23,11 @@ export class MascotController {
         ) {
             this.siteData = siteDataOrConfig.siteData;
             this.localizationManager = siteDataOrConfig.localizationManager;
+            this.fox3d = siteDataOrConfig.fox3d || fox3dArg;
         } else {
             this.siteData = siteDataOrConfig;
             this.localizationManager = localizationManagerArg;
+            this.fox3d = fox3dArg;
         }
 
         this.quoteIndex = -1;
@@ -105,6 +108,10 @@ export class MascotController {
             cleanupBounce();
             this.bounceTimerId = null;
         }, BOUNCE_DURATION_MS);
+
+        if (this.fox3d && typeof this.fox3d.triggerSpin === 'function') {
+            this.fox3d.triggerSpin();
+        }
 
         this.showNextQuote();
     }
