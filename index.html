@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="tr" data-theme="dark">
+<html lang="tr" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mehmet İhsan Ekinci — Sistem, Ağ Güvenliği & Yazılım Mühendisliği</title>
+    <title>Mehmet İhsan Ekinci — Sistem, Ağ Güvenliği &amp; Yazılım Mühendisliği</title>
     <meta name="description"
-        content="Mehmet İhsan Ekinci — Marmara Üniversitesi Bilgisayar Mühendisliği öğrencisi. Ağ ve siber güvenlik mimarileri, Linux sistem programlama (C, epoll), SOLID prensipleri ve modern web teknolojileri portfolyosu.">
+        content="Mehmet İhsan Ekinci — Marmara Üniversitesi Bilgisayar Mühendisliği öğrencisi. Ağ ve siber güvenlik mimarileri, Linux sistem programlama (C, epoll), SOLID prensipleri ve modern yazılım mimarileri.">
     <meta name="keywords"
         content="Mehmet İhsan Ekinci, Bilgisayar Mühendisliği, Marmara Üniversitesi, Ağ Güvenliği, Sistem Programlama, Linux, C, epoll, TypeScript, Python, SOLID, mayaICT">
     <meta name="author" content="Mehmet İhsan Ekinci">
-    <meta name="theme-color" content="#090d16">
+    <meta name="theme-color" content="#f6f5f1">
 
     <!-- OpenGraph Meta Etiketleri -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mihsanekinci.github.io/">
-    <meta property="og:title" content="Mehmet İhsan Ekinci — Sistem, Ağ Güvenliği & Yazılım Mühendisliği">
+    <meta property="og:title" content="Mehmet İhsan Ekinci — Sistem, Ağ Güvenliği &amp; Yazılım Mühendisliği">
     <meta property="og:description"
         content="Ağ ve siber güvenlik mimarileri, Linux sistem programlama, temiz yazılım prensipleri (SOLID) ve modern web teknolojileri kesişiminde mühendislik çözümleri.">
     <meta property="og:image" content="https://mihsanekinci.github.io/assets/logo.png">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Mehmet İhsan Ekinci — Sistem, Ağ Güvenliği & Yazılım Mühendisliği">
+    <meta name="twitter:title" content="Mehmet İhsan Ekinci — Sistem, Ağ Güvenliği &amp; Yazılım Mühendisliği">
     <meta name="twitter:description"
         content="Ağ güvenliği, Linux sistem programlama (C/epoll), TypeScript, Python ve SOLID yazılım mimarileri portfolyosu.">
 
@@ -41,40 +41,33 @@
 </head>
 
 <body>
-    <!-- Arka Plan Atmosferik Efektleri -->
-    <div class="bg-grid" aria-hidden="true"></div>
-    <div class="bg-glow bg-glow-primary" aria-hidden="true"></div>
-    <div class="bg-glow bg-glow-secondary" aria-hidden="true"></div>
-
-    <!-- Üst Navigasyon Barı -->
+    <!-- Üst Teknik Künye & Navigasyon Barı -->
     <header class="site-header" id="siteHeader">
-        <nav class="navbar container" aria-label="Ana Navigasyon">
+        <nav class="navbar" aria-label="Ana Navigasyon">
             <div class="nav-brand">
-                <a href="#hero" class="brand-logo" aria-label="Mehmet İhsan Ekinci Ana Sayfa">
-                    MİE<span>.</span>
-                </a>
-                <div class="status-pill">
+                <a href="#hero" class="brand-logo">MEHMET İHSAN EKİNCİ</a>
+                <span class="spec-divider" aria-hidden="true">//</span>
+                <span class="status-indicator">
                     <span class="status-dot" aria-hidden="true"></span>
-                    <span data-i18n="nav.status">Mühendislik Projelerine Açık</span>
-                </div>
+                    <span data-i18n="nav.status">MÜHENDİSLİK PROJELERİNE AÇIK</span>
+                </span>
             </div>
 
             <div id="navLinks" class="nav-links">
-                <a href="#about" class="nav-link" data-i18n="nav.about">Hakkımda</a>
-                <a href="#experience" class="nav-link" data-i18n="nav.experience">Deneyim & Eğitim</a>
-                <a href="#projects" class="nav-link" data-i18n="nav.projects">Projeler</a>
-                <a href="#skills" class="nav-link" data-i18n="nav.skills">Yetenekler</a>
-                <a href="#contact" class="nav-link" data-i18n="nav.contact">İletişim</a>
+                <a href="#about" class="nav-link" data-i18n="nav.about">01 Profil</a>
+                <a href="#experience" class="nav-link" data-i18n="nav.experience">02 Deneyim</a>
+                <a href="#projects" class="nav-link" data-i18n="nav.projects">03 Projeler</a>
+                <a href="#skills" class="nav-link" data-i18n="nav.skills">04 Yığın</a>
+                <a href="#ethos" class="nav-link" data-i18n="nav.ethos">05 Felsefe</a>
+                <a href="#contact" class="nav-link" data-i18n="nav.contact">06 İletişim</a>
             </div>
 
             <div class="nav-actions">
-                <button id="langToggleBtn" class="icon-btn lang-btn" type="button" aria-label="Change Language"
-                    title="Dil Değiştir / Switch Language">
+                <button id="langToggleBtn" class="spec-btn lang-btn" type="button" aria-label="Change Language">
                     <span id="langLabel">EN</span>
                 </button>
-                <button id="themeToggleBtn" class="icon-btn theme-btn" type="button" aria-label="Toggle Theme"
-                    title="Tema Değiştir / Toggle Theme">
-                    <span id="themeIcon">☀️</span>
+                <button id="themeToggleBtn" class="spec-btn theme-btn" type="button" aria-label="Toggle Theme">
+                    <span id="themeIcon" data-i18n="nav.themeToggle">KARBON</span>
                 </button>
                 <button id="mobileMenuBtn" class="hamburger-btn" type="button" aria-label="Menu" aria-expanded="false"
                     aria-controls="navLinks">
@@ -86,206 +79,104 @@
         </nav>
     </header>
 
-    <main>
-        <!-- 00 // HERO BÖLÜMÜ -->
-        <section id="hero" class="hero-section">
-            <div class="container hero-container">
-                <!-- Sol Sütun: Tanıtım & Aksiyonlar -->
-                <div class="hero-content">
-                    <div class="hero-badge">
-                        <span class="badge-dot" aria-hidden="true"></span>
-                        <span data-i18n="hero.badge">Sistem, Ağ Güvenliği & Yazılım Mühendisliği</span>
+    <!-- Asimetrik İsviçre Mimari Paftası (.swiss-sheet) -->
+    <main class="swiss-sheet" id="hero">
+        <!-- BÖLÜM 01 // PROFİL & MİMARİ KÜNYE -->
+        <section id="about" class="swiss-row profile-row">
+            <aside class="swiss-index-col">
+                <div class="index-sticky">
+                    <div class="index-code" data-i18n="hero.sectionTag">01 / PROFİL</div>
+                    <div class="index-meta">
+                        41.0082° N, 28.9784° E<br>
+                        <span data-i18n="hero.locationLabel">İstanbul, Türkiye</span>
                     </div>
+                </div>
+            </aside>
 
-                    <h1 class="hero-title">
-                        <span data-i18n="hero.greeting">Merhaba, ben</span>
-                        <span class="gradient-text">Mehmet İhsan Ekinci</span>
-                    </h1>
-
+            <div class="swiss-content-col">
+                <!-- Üst Ana Blok -->
+                <div class="profile-lead-block">
+                    <div class="profile-kicker" data-i18n="hero.badge">SİSTEM, AĞ GÜVENLİĞİ &amp; YAZILIM MÜHENDİSLİĞİ
+                    </div>
+                    <h1 class="hero-title">Mehmet İhsan Ekinci</h1>
                     <p class="hero-subtitle" data-i18n="hero.subtitle">
                         Marmara Üniversitesi Bilgisayar Mühendisliği öğrencisiyim. Ağ ve siber güvenlik mimarileri,
                         Linux sistem programlama, temiz yazılım prensipleri (SOLID) ve modern web teknolojileri
                         kesişiminde uçtan uca mühendislik çözümleri üretiyorum.
                     </p>
+                    <p class="profile-extended" data-i18n="about.bentoMainDesc">
+                        Bir yazılımın yalnızca çalışması yetmez; güvenli, okunabilir, test edilebilir ve
+                        sürdürülebilir olması gerekir. Ağ katmanındaki paket akışından (TCP/IP, epoll) uygulama
+                        katmanındaki SOLID prensiplerine kadar her seviyede modülerliği ve performansı
+                        önceliklendiriyorum.
+                    </p>
 
-                    <div class="hero-actions">
-                        <a href="#projects" class="btn btn-primary" data-i18n="hero.ctaProjects">Projeleri İncele</a>
-                        <a href="#contact" class="btn btn-secondary" data-i18n="hero.ctaContact">İletişime Geç</a>
-                        <button id="heroCopyEmailBtn" class="btn btn-ghost" type="button"
+                    <div class="profile-actions">
+                        <a href="#projects" class="action-link action-primary">
+                            <span data-i18n="hero.ctaProjects">→ Seçilmiş Projeler (08)</span>
+                        </a>
+                        <a href="https://github.com/mihsanekinci" target="_blank" rel="noopener noreferrer"
+                            class="action-link">GitHub ↗</a>
+                        <a href="https://www.linkedin.com/in/mehmetihsanekinci/" target="_blank"
+                            rel="noopener noreferrer" class="action-link">LinkedIn ↗</a>
+                        <button id="heroCopyEmailBtn" class="action-link" type="button"
                             data-email="ihsanekinci@marun.edu.tr">
                             <span data-i18n="hero.copyEmail">E-postayı Kopyala</span>
                         </button>
                     </div>
-
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <span class="stat-value">17+</span>
-                            <span class="stat-label" data-i18n="hero.stats.repos">Açık Kaynak Repo</span>
-                        </div>
-                        <div class="stat-divider" aria-hidden="true"></div>
-                        <div class="stat-item">
-                            <span class="stat-value">3</span>
-                            <span class="stat-label" data-i18n="hero.stats.focus">Temel Odak Alanı</span>
-                            <span class="stat-sub">NetSec • Systems • Web</span>
-                        </div>
-                        <div class="stat-divider" aria-hidden="true"></div>
-                        <div class="stat-item">
-                            <span class="stat-value">SOLID</span>
-                            <span class="stat-label" data-i18n="hero.stats.architecture">Mimari Yaklaşım</span>
-                        </div>
-                    </div>
                 </div>
 
-                <!-- Sağ Sütun: İnteraktif Mühendislik Terminali -->
-                <div class="hero-visual">
-                    <div class="terminal-card" role="region" aria-label="Mühendislik Terminali Özeti">
-                        <div class="terminal-header">
-                            <div class="terminal-dots" aria-hidden="true">
-                                <span class="dot dot-red"></span>
-                                <span class="dot dot-yellow"></span>
-                                <span class="dot dot-green"></span>
-                            </div>
-                            <span class="terminal-title" data-i18n="hero.terminalTitle">mie@workstation: ~</span>
-                            <span class="terminal-badge">zsh</span>
-                        </div>
-                        <div class="terminal-body">
-                            <div class="terminal-block">
-                                <div class="terminal-cmd">
-                                    <span class="prompt-sign">$</span>
-                                    <span class="cmd-text">whoami</span>
-                                </div>
-                                <div class="terminal-output">
-                                    Mehmet İhsan Ekinci — Computer Engineering @ Marmara Univ.
-                                </div>
-                            </div>
-
-                            <div class="terminal-block">
-                                <div class="terminal-cmd">
-                                    <span class="prompt-sign">$</span>
-                                    <span class="cmd-text">cat focus.json</span>
-                                </div>
-                                <pre class="terminal-json"><code>{
-  <span class="json-key">"network_security"</span>: [<span class="json-str">"TCP/IP"</span>, <span class="json-str">"OWASP"</span>, <span class="json-str">"mayaICT"</span>],
-  <span class="json-key">"systems"</span>: [<span class="json-str">"C"</span>, <span class="json-str">"Linux"</span>, <span class="json-str">"epoll"</span>],
-  <span class="json-key">"architecture"</span>: [<span class="json-str">"TypeScript"</span>, <span class="json-str">"Python"</span>, <span class="json-str">"ASP.NET Core"</span>, <span class="json-str">"SOLID"</span>]
-}</code></pre>
-                            </div>
-
-                            <div class="terminal-block">
-                                <div class="terminal-cmd">
-                                    <span class="prompt-sign">$</span>
-                                    <span class="cmd-text">git status</span>
-                                </div>
-                                <div class="terminal-output terminal-success">
-                                    Branch: main — Clean Architecture &amp; Zero AI Slop ✓
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 01 // HAKKIMDA & MÜHENDİSLİK FELSEFESİ (BENTO GRID) -->
-        <section id="about" class="section about-section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag" data-i18n="about.sectionTag">01 // HAKKIMDA &amp; FELSEFE</span>
-                    <h2 class="section-title" data-i18n="about.title">Mühendislik Yaklaşımım</h2>
-                    <p class="section-subtitle" data-i18n="about.subtitle">
-                        Düşük seviyeli sistem protokollerinden ölçeklenebilir modern arayüzlere kadar, yazılımı bir
-                        zanaat ve disiplin olarak ele alıyorum.
-                    </p>
-                </div>
-
-                <div class="bento-grid">
-                    <!-- Geniş Ana Kart -->
-                    <article class="bento-card bento-wide">
-                        <div class="bento-card-top">
-                            <span class="bento-icon" aria-hidden="true">⚙️</span>
-                            <span class="bento-pill">Core Engineering</span>
-                        </div>
-                        <h3 data-i18n="about.bentoMainTitle">Sistem Düşüncesi &amp; Temiz Mimari</h3>
-                        <p data-i18n="about.bentoMainDesc">
-                            Bir yazılımın yalnızca çalışması yetmez; güvenli, okunabilir, test edilebilir ve
-                            sürdürülebilir olması gerekir. Ağ katmanındaki paket akışından (TCP/IP, epoll) uygulama
-                            katmanındaki SOLID prensiplerine kadar her seviyede modülerliği ve performansı
-                            önceliklendiriyorum.
-                        </p>
-                        <ul id="bentoHighlightsList" class="bento-highlights">
+                <!-- Alt 3 Sütunlu Teknik Künye Şeridi -->
+                <div class="spec-strip">
+                    <div class="spec-cell">
+                        <span class="spec-label" data-i18n="hero.stats.focus">ODAK ALANLARI</span>
+                        <ul id="bentoHighlightsList" class="spec-list">
                             <li>Ağ &amp; Siber Güvenlik (TCP/IP, OWASP, Trafik Analizi)</li>
                             <li>Sistem &amp; Gömülü Linux Programlama (C, epoll, Asenkron I/O)</li>
                             <li>Modüler Yazılım Mimarisi (TypeScript, Python, ASP.NET Core, SOLID)</li>
                         </ul>
-                    </article>
+                    </div>
 
-                    <!-- Kaizen Felsefe Kartı -->
-                    <article class="bento-card">
-                        <div class="bento-card-top">
-                            <span class="bento-icon" aria-hidden="true">🔄</span>
-                            <span class="bento-pill" data-i18n="about.kaizenSub">Sürekli İyileşme</span>
-                        </div>
-                        <h3 data-i18n="about.kaizenTitle">Kaizen (改善)</h3>
-                        <p data-i18n="about.kaizenDesc">
-                            Her commit'te daha temiz kod, daha düşük gecikme ve daha yüksek güvenlik standardı için
-                            iteratif gelişim.
-                        </p>
-                    </article>
+                    <div class="spec-cell">
+                        <span class="spec-label" data-i18n="hero.stats.repos">KURUM &amp; AKADEMİ</span>
+                        <div class="spec-value">mayaICT · Marmara Üni.</div>
+                        <div class="spec-sub" data-i18n="about.bentoMainTitle">Ağ Güvenliği &amp; Bilgisayar Müh.</div>
+                    </div>
 
-                    <!-- Ikigai Felsefe Kartı -->
-                    <article class="bento-card">
-                        <div class="bento-card-top">
-                            <span class="bento-icon" aria-hidden="true">🎯</span>
-                            <span class="bento-pill" data-i18n="about.ikigaiSub">Üretim Amacı</span>
-                        </div>
-                        <h3 data-i18n="about.ikigaiTitle">Ikigai (生き甲斐)</h3>
-                        <p data-i18n="about.ikigaiDesc">
-                            Karmaşık mühendislik problemlerini son kullanıcı ve sistemler için sade, güvenilir ve hızlı
-                            araçlara dönüştürmek.
-                        </p>
-                    </article>
-
-                    <!-- Shugyo Felsefe Kartı -->
-                    <article class="bento-card">
-                        <div class="bento-card-top">
-                            <span class="bento-icon" aria-hidden="true">🛡️</span>
-                            <span class="bento-pill" data-i18n="about.shugyoSub">Mühendislik Disiplini</span>
-                        </div>
-                        <h3 data-i18n="about.shugyoTitle">Shugyo (修行)</h3>
-                        <p data-i18n="about.shugyoDesc">
-                            Derinlemesine teknik araştırma, güçlü dokümantasyon kültürü ve sürekli pratik ile ustalığa
-                            odaklanmak.
-                        </p>
-                    </article>
+                    <div class="spec-cell">
+                        <span class="spec-label" data-i18n="hero.stats.architecture">MİMARİ STANDART</span>
+                        <div class="spec-value">C · TypeScript · Python</div>
+                        <div class="spec-sub">POSIX / epoll · SOLID · TCP/IP</div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 02 // DENEYİM & EĞİTİM (TIMELINE) -->
-        <section id="experience" class="section experience-section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag" data-i18n="experience.sectionTag">02 // YOLCULUK</span>
-                    <h2 class="section-title" data-i18n="experience.title">Deneyim &amp; Eğitim</h2>
-                    <p class="section-subtitle" data-i18n="experience.subtitle">
+        <!-- BÖLÜM 02 // DENEYİM & EĞİTİM -->
+        <section id="experience" class="swiss-row experience-row">
+            <aside class="swiss-index-col">
+                <div class="index-sticky">
+                    <div class="index-code" data-i18n="experience.sectionTag">02 / YOLCULUK</div>
+                    <h2 class="index-title" data-i18n="experience.title">Deneyim &amp; Eğitim</h2>
+                    <p class="index-desc" data-i18n="experience.subtitle">
                         Akademik altyapım ve sektörel mühendislik çalışmalarım.
                     </p>
                 </div>
+            </aside>
 
+            <div class="swiss-content-col">
                 <div id="timelineContainer" class="timeline-container">
-                    <!-- JS tarafından dinamik olarak render edilir; ilk yükleme için semantik fallback -->
                     <article class="timeline-item">
-                        <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <div class="timeline-header">
                                 <span class="timeline-period">2026 — Günümüz</span>
-                                <span class="timeline-type-badge">mayaICT • İstanbul, Türkiye</span>
+                                <span class="timeline-location">İstanbul, Türkiye</span>
                             </div>
                             <h3 class="timeline-role">Ağ ve Ağ Güvenliği Mühendisliği (İş Yeri Eğitimi / Staj)</h3>
+                            <div class="timeline-org">mayaICT</div>
                             <p class="timeline-desc">
                                 Kurumsal ağ topolojileri, güvenlik duvarı politikaları, ağ trafiği analizi ve siber
-                                güvenlik protokolleri üzerine uygulamalı mühendislik çalışmaları. Teknik süreçlerin
-                                yapılandırılmış dokümantasyonu ve güvenli ağ mimarisi tasarımı.
+                                güvenlik protokolleri üzerine uygulamalı mühendislik çalışmaları.
                             </p>
                             <div class="timeline-tags">
                                 <span class="tech-tag">Network Security</span>
@@ -300,139 +191,245 @@
             </div>
         </section>
 
-        <!-- 03 // PROJELER (PORTFOLIO & GITHUB SYNC) -->
-        <section id="projects" class="section projects-section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag" data-i18n="projects.sectionTag">03 // PORTFOLYO</span>
-                    <h2 class="section-title" data-i18n="projects.title">Seçilmiş Mühendislik Projeleri</h2>
-                    <p class="section-subtitle" data-i18n="projects.subtitle">
+        <!-- BÖLÜM 03 // SEÇİLMİŞ PROJELER -->
+        <section id="projects" class="swiss-row projects-row">
+            <aside class="swiss-index-col">
+                <div class="index-sticky">
+                    <div class="index-code" data-i18n="projects.sectionTag">03 / PROJELER</div>
+                    <h2 class="index-title" data-i18n="projects.title">Seçilmiş Çalışmalar</h2>
+                    <p class="index-desc" data-i18n="projects.subtitle">
                         Ağ güvenliği, sistem programlama, yapay zekâ ve modern web mimarileri üzerine geliştirdiğim açık
                         kaynak çalışmalar.
                     </p>
-                </div>
 
-                <!-- Kategori Filtre Çubuğu -->
-                <div id="projectFilters" class="filter-bar" role="tablist" aria-label="Proje Kategorileri">
-                    <button class="filter-btn active" type="button" data-filter="all"
-                        data-i18n="projects.filters.all">Tümü</button>
-                    <button class="filter-btn" type="button" data-filter="network"
-                        data-i18n="projects.filters.network">Ağ &amp; Güvenlik</button>
-                    <button class="filter-btn" type="button" data-filter="systems"
-                        data-i18n="projects.filters.systems">Sistem &amp; C</button>
-                    <button class="filter-btn" type="button" data-filter="web"
-                        data-i18n="projects.filters.web">Web &amp; Mimari</button>
-                    <button class="filter-btn" type="button" data-filter="ai"
-                        data-i18n="projects.filters.ai">AI &amp; Veri</button>
-                </div>
+                    <div id="projectFilters" class="filter-bar-vertical" role="tablist" aria-label="Proje Kategorileri">
+                        <button class="filter-btn active" type="button" data-filter="all">
+                            <span data-i18n="projects.filters.all">Tümü</span>
+                            <span class="filter-count">08</span>
+                        </button>
+                        <button class="filter-btn" type="button" data-filter="network">
+                            <span data-i18n="projects.filters.network">Ağ &amp; Güvenlik</span>
+                            <span class="filter-count">02</span>
+                        </button>
+                        <button class="filter-btn" type="button" data-filter="systems">
+                            <span data-i18n="projects.filters.systems">Sistem &amp; C</span>
+                            <span class="filter-count">02</span>
+                        </button>
+                        <button class="filter-btn" type="button" data-filter="web">
+                            <span data-i18n="projects.filters.web">Web &amp; Mimari</span>
+                            <span class="filter-count">03</span>
+                        </button>
+                        <button class="filter-btn" type="button" data-filter="ai">
+                            <span data-i18n="projects.filters.ai">AI &amp; Veri</span>
+                            <span class="filter-count">01</span>
+                        </button>
+                    </div>
 
-                <!-- Proje Izgarası (JS ile doldurulur) -->
-                <div id="projectsGrid" class="projects-grid"></div>
-
-                <!-- Alt Aksiyon -->
-                <div class="projects-footer">
-                    <a href="https://github.com/mihsanekinci?tab=repositories" target="_blank"
-                        rel="noopener noreferrer" class="btn btn-secondary">
-                        <span data-i18n="projects.viewAllGithub">GitHub'da Tüm Projeleri Gör</span> ↗
-                    </a>
+                    <div class="index-footer-link">
+                        <a href="https://github.com/mihsanekinci?tab=repositories" target="_blank"
+                            rel="noopener noreferrer" class="action-link">
+                            <span data-i18n="projects.viewAllGithub">Tüm Repolar (17+)</span> ↗
+                        </a>
+                    </div>
                 </div>
+            </aside>
+
+            <div class="swiss-content-col">
+                <div id="projectsGrid" class="projects-list"></div>
             </div>
         </section>
 
-        <!-- 04 // TEKNİK YETKİNLİKLER (TECH STACK) -->
-        <section id="skills" class="section skills-section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag" data-i18n="skills.sectionTag">04 // TEKNOLOJİ YIĞINI</span>
-                    <h2 class="section-title" data-i18n="skills.title">Teknik Yetkinlikler</h2>
-                    <p class="section-subtitle" data-i18n="skills.subtitle">
+        <!-- BÖLÜM 04 // TEKNİK YETKİNLİKLER -->
+        <section id="skills" class="swiss-row skills-row">
+            <aside class="swiss-index-col">
+                <div class="index-sticky">
+                    <div class="index-code" data-i18n="skills.sectionTag">04 / YIĞIN</div>
+                    <h2 class="index-title" data-i18n="skills.title">Teknik Yetkinlikler</h2>
+                    <p class="index-desc" data-i18n="skills.subtitle">
                         Kullandığım programlama dilleri, sistem araçları ve mühendislik standartları.
                     </p>
                 </div>
+            </aside>
 
-                <div id="skillsGrid" class="skills-grid"></div>
+            <div class="swiss-content-col">
+                <div id="skillsGrid" class="skills-matrix"></div>
             </div>
         </section>
 
-        <!-- 05 // İLETİŞİM (CONTACT) -->
-        <section id="contact" class="section contact-section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag" data-i18n="contact.sectionTag">05 // İLETİŞİM</span>
-                    <h2 class="section-title" data-i18n="contact.title">Birlikte Çalışalım</h2>
-                    <p class="section-subtitle" data-i18n="contact.subtitle">
+        <!-- BÖLÜM 05 // ALTI İLKE (JAPON FELSEFESİ) -->
+        <section id="ethos" class="swiss-row ethos-row">
+            <aside class="swiss-index-col">
+                <div class="index-sticky">
+                    <div class="index-code" data-i18n="ethos.sectionTag">05 / ETHOS</div>
+                    <h2 class="index-title" data-i18n="ethos.title">Altı İlke</h2>
+                    <p class="index-desc" data-i18n="ethos.subtitle">
+                        Mühendislik pratiğimi, kod kalitemi ve problem çözme disiplinimi şekillendiren altı Japon
+                        felsefi ilkesi.
+                    </p>
+                    <div class="kanji-stamp" aria-hidden="true">
+                        改善 · 生き甲斐 · 修行<br>
+                        我慢 · 仕方がない · 反省
+                    </div>
+                    <button id="openEthosDrawerBtn" type="button" class="action-link action-primary"
+                        data-i18n="ethos.openMonograph">
+                        → Tüm İlkeleri Derinlemesine Oku
+                    </button>
+                </div>
+            </aside>
+
+            <div class="swiss-content-col">
+                <div id="ethosGrid" class="ethos-matrix">
+                    <article class="ethos-cell" data-ethos-id="kaizen" tabindex="0" role="button">
+                        <div class="ethos-cell-top">
+                            <span class="ethos-index">01 / KAIZEN</span>
+                            <span class="ethos-kanji" aria-hidden="true">改善</span>
+                        </div>
+                        <h3 class="ethos-title" data-i18n="about.kaizenTitle">Kaizen</h3>
+                        <span class="ethos-sub" data-i18n="about.kaizenSub">Sürekli İyileşme</span>
+                        <p class="ethos-desc" data-i18n="about.kaizenDesc">
+                            Her commit'te daha temiz kod, daha düşük gecikme ve daha yüksek güvenlik standardı için
+                            iteratif gelişim.
+                        </p>
+                    </article>
+
+                    <article class="ethos-cell" data-ethos-id="ikigai" tabindex="0" role="button">
+                        <div class="ethos-cell-top">
+                            <span class="ethos-index">02 / IKIGAI</span>
+                            <span class="ethos-kanji" aria-hidden="true">生き甲斐</span>
+                        </div>
+                        <h3 class="ethos-title" data-i18n="about.ikigaiTitle">Ikigai</h3>
+                        <span class="ethos-sub" data-i18n="about.ikigaiSub">Üretim Amacı</span>
+                        <p class="ethos-desc" data-i18n="about.ikigaiDesc">
+                            Karmaşık mühendislik problemlerini son kullanıcı ve sistemler için sade, güvenilir ve hızlı
+                            araçlara dönüştürmek.
+                        </p>
+                    </article>
+
+                    <article class="ethos-cell" data-ethos-id="shugyo" tabindex="0" role="button">
+                        <div class="ethos-cell-top">
+                            <span class="ethos-index">03 / SHUGYO</span>
+                            <span class="ethos-kanji" aria-hidden="true">修行</span>
+                        </div>
+                        <h3 class="ethos-title" data-i18n="about.shugyoTitle">Shugyo</h3>
+                        <span class="ethos-sub" data-i18n="about.shugyoSub">Mühendislik Disiplini</span>
+                        <p class="ethos-desc" data-i18n="about.shugyoDesc">
+                            Derinlemesine teknik araştırma, güçlü dokümantasyon kültürü ve sürekli pratik ile ustalığa
+                            odaklanmak.
+                        </p>
+                    </article>
+
+                    <article class="ethos-cell" data-ethos-id="gaman" tabindex="0" role="button">
+                        <div class="ethos-cell-top">
+                            <span class="ethos-index">04 / GAMAN</span>
+                            <span class="ethos-kanji" aria-hidden="true">我慢</span>
+                        </div>
+                        <h3 class="ethos-title">Gaman</h3>
+                        <span class="ethos-sub">Direnç &amp; Sabır</span>
+                        <p class="ethos-desc">
+                            Zorlu sistem hataları ve karmaşık ağ darboğazları karşısında soğukkanlılıkla kök neden
+                            analizini sürdürmek.
+                        </p>
+                    </article>
+
+                    <article class="ethos-cell" data-ethos-id="shikata-ga-nai" tabindex="0" role="button">
+                        <div class="ethos-cell-top">
+                            <span class="ethos-index">05 / SHIKATA GA NAI</span>
+                            <span class="ethos-kanji" aria-hidden="true">仕方がない</span>
+                        </div>
+                        <h3 class="ethos-title">Shikata ga nai</h3>
+                        <span class="ethos-sub">Pragmatik Kabulleniş</span>
+                        <p class="ethos-desc">
+                            Değiştirilemeyen dış kısıtları hızla kabul edip, enerjiyi kontrol edilebilir mimari
+                            çözümlere yönlendirmek.
+                        </p>
+                    </article>
+
+                    <article class="ethos-cell" data-ethos-id="hansei" tabindex="0" role="button">
+                        <div class="ethos-cell-top">
+                            <span class="ethos-index">06 / HANSEI</span>
+                            <span class="ethos-kanji" aria-hidden="true">反省</span>
+                        </div>
+                        <h3 class="ethos-title">Hansei</h3>
+                        <span class="ethos-sub">Öz-Değerlendirme</span>
+                        <p class="ethos-desc">
+                            Her proje ve sürüm sonrasında eksikleri dürüstçe analiz ederek bir sonraki mimariyi daha
+                            sağlam kurmak.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- BÖLÜM 06 // İLETİŞİM -->
+        <section id="contact" class="swiss-row contact-row">
+            <aside class="swiss-index-col">
+                <div class="index-sticky">
+                    <div class="index-code" data-i18n="contact.sectionTag">06 / İLETİŞİM</div>
+                    <h2 class="index-title" data-i18n="contact.title">Birlikte Çalışalım</h2>
+                    <p class="index-desc" data-i18n="contact.subtitle">
                         Staj, mühendislik projeleri, açık kaynak iş birlikleri veya teknik sohbetler için bana doğrudan
                         ulaşabilirsiniz.
                     </p>
                 </div>
+            </aside>
 
-                <div class="contact-grid">
-                    <!-- Sol Sütun: Doğrudan İletişim & Sosyal Kartlar -->
-                    <div class="contact-cards">
-                        <!-- Birincil E-posta Kartı -->
-                        <div class="contact-card">
-                            <div class="contact-card-header">
-                                <span class="contact-icon" aria-hidden="true">🎓</span>
-                                <div>
-                                    <span class="contact-label" data-i18n="contact.emailCardTitle">Akademik &amp;
-                                        Birincil E-posta</span>
-                                    <a href="mailto:ihsanekinci@marun.edu.tr"
-                                        class="contact-value">ihsanekinci@marun.edu.tr</a>
-                                </div>
+            <div class="swiss-content-col">
+                <div class="contact-split">
+                    <!-- Sol: Doğrudan İletişim Kanalları -->
+                    <div class="contact-channels">
+                        <div class="channel-row">
+                            <div class="channel-meta">
+                                <span class="channel-code">01 / AKADEMİK</span>
+                                <span class="channel-label" data-i18n="contact.emailCardTitle">Akademik &amp; Birincil
+                                    E-posta</span>
                             </div>
-                            <div class="contact-card-actions">
-                                <button type="button" class="btn btn-sm copy-email-btn"
+                            <a href="mailto:ihsanekinci@marun.edu.tr"
+                                class="channel-value">ihsanekinci@marun.edu.tr</a>
+                            <div class="channel-actions">
+                                <button type="button" class="spec-btn copy-email-btn"
                                     data-email="ihsanekinci@marun.edu.tr" data-i18n="contact.copyBtn">Kopyala</button>
-                                <a href="mailto:ihsanekinci@marun.edu.tr" class="btn btn-sm btn-outline"
+                                <a href="mailto:ihsanekinci@marun.edu.tr" class="spec-btn"
                                     data-i18n="contact.sendEmailBtn">E-posta Gönder</a>
                             </div>
                         </div>
 
-                        <!-- İkincil E-posta Kartı -->
-                        <div class="contact-card">
-                            <div class="contact-card-header">
-                                <span class="contact-icon" aria-hidden="true">✉️</span>
-                                <div>
-                                    <span class="contact-label" data-i18n="contact.emailAltTitle">Kişisel E-posta</span>
-                                    <a href="mailto:ihsanekinci131@gmail.com"
-                                        class="contact-value">ihsanekinci131@gmail.com</a>
-                                </div>
+                        <div class="channel-row">
+                            <div class="channel-meta">
+                                <span class="channel-code">02 / KİŞİSEL</span>
+                                <span class="channel-label" data-i18n="contact.emailAltTitle">Kişisel E-posta</span>
                             </div>
-                            <div class="contact-card-actions">
-                                <button type="button" class="btn btn-sm copy-email-btn"
+                            <a href="mailto:ihsanekinci131@gmail.com"
+                                class="channel-value">ihsanekinci131@gmail.com</a>
+                            <div class="channel-actions">
+                                <button type="button" class="spec-btn copy-email-btn"
                                     data-email="ihsanekinci131@gmail.com" data-i18n="contact.copyBtn">Kopyala</button>
-                                <a href="mailto:ihsanekinci131@gmail.com" class="btn btn-sm btn-outline"
+                                <a href="mailto:ihsanekinci131@gmail.com" class="spec-btn"
                                     data-i18n="contact.sendEmailBtn">E-posta Gönder</a>
                             </div>
                         </div>
 
-                        <!-- Sosyal Medya Kartları -->
-                        <div class="social-cards-row">
+                        <div class="channel-row">
+                            <div class="channel-meta">
+                                <span class="channel-code">03 / KOD DEPOSU</span>
+                                <span class="channel-label">GitHub</span>
+                            </div>
                             <a href="https://github.com/mihsanekinci" target="_blank" rel="noopener noreferrer"
-                                class="social-card">
-                                <span class="social-icon" aria-hidden="true">💻</span>
-                                <div class="social-info">
-                                    <span class="social-name">GitHub</span>
-                                    <span class="social-handle">@mihsanekinci</span>
-                                </div>
-                                <span class="social-arrow" aria-hidden="true">↗</span>
-                            </a>
+                                class="channel-value">github.com/mihsanekinci ↗</a>
+                        </div>
 
+                        <div class="channel-row">
+                            <div class="channel-meta">
+                                <span class="channel-code">04 / PROFESYONEL AĞ</span>
+                                <span class="channel-label">LinkedIn</span>
+                            </div>
                             <a href="https://www.linkedin.com/in/mehmetihsanekinci/" target="_blank"
-                                rel="noopener noreferrer" class="social-card">
-                                <span class="social-icon" aria-hidden="true">🔗</span>
-                                <div class="social-info">
-                                    <span class="social-name">LinkedIn</span>
-                                    <span class="social-handle">/in/mehmetihsanekinci</span>
-                                </div>
-                                <span class="social-arrow" aria-hidden="true">↗</span>
-                            </a>
+                                rel="noopener noreferrer" class="channel-value">linkedin.com/in/mehmetihsanekinci ↗</a>
                         </div>
                     </div>
 
-                    <!-- Sağ Sütun: Hızlı Mesaj Formu -->
-                    <div class="contact-form-card">
-                        <h3 class="form-card-title" data-i18n="contact.formTitle">Hızlı Mesaj Oluştur</h3>
+                    <!-- Sağ: Hızlı Mesaj Oluşturucu -->
+                    <div class="contact-composer">
+                        <h3 class="composer-title" data-i18n="contact.formTitle">Hızlı Mesaj Oluştur</h3>
                         <form id="quickContactForm" class="contact-form">
                             <div class="form-group">
                                 <label for="senderName" data-i18n="contact.formName">Adınız Soyadınız</label>
@@ -462,7 +459,7 @@
                                     data-i18n-placeholder="contact.formMessagePlaceholder"></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-full" data-i18n="contact.formSubmit">
+                            <button type="submit" class="submit-btn" data-i18n="contact.formSubmit">
                                 E-posta İstemcisinde Aç →
                             </button>
                             <p class="form-response-note" data-i18n="contact.responseNote">
@@ -477,10 +474,10 @@
 
     <!-- Alt Bilgi (Footer) -->
     <footer class="site-footer">
-        <div class="container footer-container">
+        <div class="footer-inner">
             <div class="footer-left">
                 <p class="footer-copy">
-                    &copy; <span id="currentYear" data-current-year>2026</span> Mehmet İhsan Ekinci.
+                    &copy; <span id="currentYear" data-current-year>2026</span> Mehmet İhsan Ekinci —
                     <span data-i18n="footer.rights">Tüm hakları saklıdır.</span>
                 </p>
                 <p class="footer-built" data-i18n="footer.builtWith">
@@ -490,15 +487,29 @@
 
             <div class="footer-right">
                 <a href="labs/index.html" class="labs-archive-link" data-i18n="footer.labsArchive">
-                    📚 Web Programlama Dersi Lab Arşivi (/labs)
+                    Web Programlama Dersi Lab Arşivi (/labs) ↗
                 </a>
                 <a href="#hero" class="back-to-top" data-i18n="footer.backToTop">Yukarı Çık ↑</a>
             </div>
         </div>
     </footer>
 
+    <!-- Ethos Monograph Okuma Çekmecesi / Modalı -->
+    <div id="ethosDrawer" class="ethos-drawer" aria-hidden="true">
+        <div id="ethosDrawerBackdrop" class="ethos-drawer-backdrop"></div>
+        <aside class="ethos-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="ethosDrawerTitle">
+            <div class="ethos-drawer-header">
+                <span id="ethosDrawerTitle" class="index-code" data-i18n="ethos.drawerTag">MONOGRAPH // ALTI JAPON
+                    İLKESİ</span>
+                <button id="closeEthosDrawerBtn" type="button" class="spec-btn" data-i18n="ethos.closeBtn">KAPAT
+                    [ESC]</button>
+            </div>
+            <div id="ethosDrawerBody" class="ethos-drawer-body"></div>
+        </aside>
+    </div>
+
     <!-- Bildirim Kutusu (Toast) -->
-    <div id="toastNotification" class="toast" aria-live="polite"></div>
+    <div id="toastNotification" class="toast" aria-live="polite" aria-hidden="true"></div>
 
     <!-- Ana Uygulama Modülü -->
     <script type="module" src="js/app.js"></script>

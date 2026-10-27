@@ -1,25 +1,31 @@
 /**
- * @fileoverview Tema Yönetimi Modülü (Dark / Light Mode).
+ * @fileoverview Tema Yönetimi Modülü (Sıcak Kağıt / Karbon Modu).
  * Single Responsibility: Kullanıcının tema tercihini (mie_theme) localStorage üzerinden
- * okur/yazar, kök <html data-theme="..."> niteliğini ve #themeToggleBtn / #themeIcon
- * bileşenlerini senkronize eder.
+ * okur/yazar, varsayılan olarak 'light' (Sıcak Kağıt & Mürekkep) temasını uygular ve
+ * #themeToggleBtn / #themeIcon metinlerini aktif dile göre emojisiz olarak günceller.
  */
 
 const STORAGE_KEY = 'mie_theme';
-const DEFAULT_THEME = 'dark';
+const DEFAULT_THEME = 'light';
 
 export class ThemeManager {
     /**
      * @param {Object} [options]
      * @param {string} [options.toggleBtnSelector='#themeToggleBtn'] - Tema değiştirme butonu seçicisi
-     * @param {string} [options.iconSelector='#themeIcon'] - Tema ikonu seçicisi
+     * @param {string} [options.iconSelector='#themeIcon'] - Tema etiket/ikon seçicisi
+     * @param {Object} [options.i18nDictionary] - Çeviri sözlüğü (siteData.i18n)
+     * @param {'tr'|'en'} [options.initialLang='tr'] - Başlangıç dili
      */
     constructor({
         toggleBtnSelector = '#themeToggleBtn',
-        iconSelector = '#themeIcon'
+        iconSelector = '#themeIcon',
+        i18nDictionary = null,
+        initialLang = 'tr'
     } = {}) {
         this.toggleBtnSelector = toggleBtnSelector;
         this.iconSelector = iconSelector;
+        this.i18nDictionary = i18nDictionary;
+        this.currentLang = initialLang;
         this.currentTheme = this.readSavedTheme();
     }
 
@@ -32,9 +38,9 @@ export class ThemeManager {
     }
 
     /**
-     * localStorage'dan kayıtlı temayı okur; geçersiz veya tanımsızsa 'dark' döner.
+     * localStorage'dan kayıtlı temayı okur; geçersiz veya tanımsızsa varsayılan 'light' döner.
      *
-     * @returns {'dark'|'light'}
+     * @returns {'light'|'dark'}
      */
     readSavedTheme() {
         try {
@@ -49,12 +55,12 @@ export class ThemeManager {
     }
 
     /**
-     * Temayı DOM'a ve localStorage'a uygular, buton ikonunu günceller.
+     * Temayı DOM'a ve localStorage'a uygular, buton etiketini günceller.
      *
-     * @param {'dark'|'light'} theme - Uygulanacak tema
+     * @param {'light'|'dark'} theme - Uygulanacak tema
      */
     applyTheme(theme) {
-        const validTheme = theme === 'light' ? 'light' : 'dark';
+        const validTheme = theme === 'dark' ? 'dark' : 'light';
         this.currentTheme = validTheme;
 
         document.documentElement.setAttribute('data-theme', validTheme);
@@ -69,46 +75,69 @@ export class ThemeManager {
     }
 
     /**
-     * Mevcut temayı 'dark' <-> 'light' arasında değiştirir.
+     * Mevcut temayı 'light' <-> 'dark' arasında değiştirir.
      *
-     * @returns {'dark'|'light'} Yeni aktif tema
+     * @returns {'light'|'dark'} Yeni aktif tema
      */
     toggleTheme() {
-        const nextTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+        const nextTheme = this.currentTheme === 'light' ? 'dark' : 'light';
         this.applyTheme(nextTheme);
         return nextTheme;
     }
 
     /**
+     * Aktif dil değiştiğinde tema butonunun metnini günceller.
+     *
+     * @param {'tr'|'en'} lang - Yeni aktif dil kodu
+     */
+    setLanguage(lang) {
+        this.currentLang = lang === 'en' ? 'en' : 'tr';
+        this.updateUI();
+    }
+
+    /**
      * Aktif temayı döner.
      *
-     * @returns {'dark'|'light'}
+     * @returns {'light'|'dark'}
      */
     getCurrentTheme() {
         return this.currentTheme;
     }
 
     /**
-     * #themeToggleBtn ve #themeIcon elemanlarını mevcut temaya göre günceller.
+     * Aktif temaya ve dile göre bir sonraki modun etiketini çözer (KARBON/CARBON veya KAĞIT/PAPER).
+     *
+     * @returns {string}
+     */
+    resolveNextModeLabel() {
+        const navDict = this.i18nDictionary?.[this.currentLang]?.nav;
+
+        if (this.currentTheme === 'light') {
+            return navDict?.themeDark || (this.currentLang === 'en' ? 'CARBON' : 'KARBON');
+        }
+        return navDict?.themeLight || (this.currentLang === 'en' ? 'PAPER' : 'KAĞIT');
+    }
+
+    /**
+     * #themeToggleBtn ve #themeIcon elemanlarını mevcut temaya ve dile göre günceller.
      */
     updateUI() {
         const toggleBtn = document.querySelector(this.toggleBtnSelector);
         const themeIcon = document.querySelector(this.iconSelector);
-
-        // Karanlık temadayken açık temaya geçişi simgeleyen ☀️ veya mevcut durumu simgeleyen 🌙:
-        // Koyu temada '🌙', açık temada '☀️' gösterilir (veya buton etiketleri güncellenir).
-        const iconChar = this.currentTheme === 'dark' ? '🌙' : '☀️';
+        const labelText = this.resolveNextModeLabel();
 
         if (themeIcon) {
-            themeIcon.textContent = iconChar;
+            themeIcon.textContent = labelText;
         } else if (toggleBtn) {
-            toggleBtn.textContent = iconChar;
+            toggleBtn.textContent = labelText;
         }
 
         if (toggleBtn) {
             toggleBtn.setAttribute(
                 'aria-label',
-                this.currentTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+                this.currentTheme === 'light'
+                    ? 'Switch to carbon dark mode'
+                    : 'Switch to warm paper light mode'
             );
             toggleBtn.setAttribute('data-current-theme', this.currentTheme);
         }

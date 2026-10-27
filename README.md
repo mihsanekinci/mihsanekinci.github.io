@@ -1,9 +1,10 @@
 # Mehmet İhsan Ekinci — Personal Engineering Portfolio
 
-[![Live Site](https://img.shields.io/badge/Live_Site-mihsanekinci.github.io-2563eb?style=for-the-badge&logo=githubpages&logoColor=white)](https://mihsanekinci.github.io)
-[![Architecture](https://img.shields.io/badge/Architecture-Modular_ES6_%2F_SOLID-10b981?style=for-the-badge&logo=javascript&logoColor=white)](./docs/decisions/ADR-001-modular-portfolio-architecture.md)
-[![Theme](https://img.shields.io/badge/Theme-Dark_%2F_Light-8b5cf6?style=for-the-badge)](https://mihsanekinci.github.io)
-[![i18n](https://img.shields.io/badge/i18n-TR_%7C_EN-f59e0b?style=for-the-badge)](https://mihsanekinci.github.io)
+[![Live Site](https://img.shields.io/badge/Live_Site-mihsanekinci.github.io-111110?style=for-the-badge&logo=githubpages&logoColor=f6f5f1)](https://mihsanekinci.github.io)
+[![Architecture](https://img.shields.io/badge/Architecture-Modular_ES6_%2F_SOLID-c83e2b?style=for-the-badge&logo=javascript&logoColor=white)](./docs/decisions/ADR-001-modular-portfolio-architecture.md)
+[![Design System](https://img.shields.io/badge/Design-Editorial_1px_Swiss_Grid-3f3e3a?style=for-the-badge)](./docs/decisions/ADR-002-anti-ai-slop-editorial-swiss-grid.md)
+[![Theme](https://img.shields.io/badge/Palette-Warm_Paper_%7C_Matte_Carbon-1c1b19?style=for-the-badge)](https://mihsanekinci.github.io)
+[![i18n](https://img.shields.io/badge/i18n-TR_%7C_EN-6b6963?style=for-the-badge)](https://mihsanekinci.github.io)
 
 > **🌐 Canlı Vitrin / Live Portfolio:** [**https://mihsanekinci.github.io**](https://mihsanekinci.github.io)
 
@@ -13,29 +14,29 @@
 
 Bu depo, **Mehmet İhsan Ekinci**'nin yazılım mühendisliği, ağ ve ağ güvenliği, sistem mimarisi ve akademik projelerini sergileyen **modüler kişisel mühendislik portfolyosu** ve aynı zamanda geçmiş üniversite ders çalışmalarının arşividir.
 
-Proje, herhangi bir ağır frontend framework'ü veya derleme (build) bağımlılığı kullanmadan, **katı SOLID prensipleri**, **katmanlı ES6 Modül mimarisi** ve **Bento Grid** tasarım diliyle sıfır bağımlılık (Zero-Dependency) felsefesiyle inşa edilmiştir.
+Proje; herhangi bir ağır frontend framework'ü veya derleme (build) bağımlılığı kullanmadan **katı SOLID prensipleri** ve **katmanlı ES6 Modül mimarisi** üzerine inşa edilmiştir. Görsel tasarımında jenerik yapay zekâ şablonlarından (*"AI Slop"*) bilinçli olarak uzak durulmuş; **12 sütunlu 1px İsviçre Izgarası (Swiss Grid)**, **Sıcak Mimari Kağıt / Mat Karbon** tipografik paleti ve mühendislik disiplinini şekillendiren **6 Japon Felsefesi İlkesi (Ethos Monograph)** benimsenmiştir.
 
-### ✨ Öne Çıkan Mühendislik Özellikleri
-- **🧱 SOLID & Katmanlı ES6 Modül Mimarisi:** Veri (`data.js`), dış servis (`githubService.js`), durum yönetimi (`themeManager.js`, `localizationManager.js`), görsel sunum (`portfolioRenderer.js`) ve kullanıcı etkileşimi (`interactionController.js`) katmanları birbirinden tamamen izole edilmiştir. Yalnızca `js/data.js` güncellenerek yeni proje veya deneyim eklenebilir (*Open/Closed Principle*).
-- **🔄 Canlı GitHub API Senkronizasyonu & Dayanıklılık:** Projelerin yıldız, fork ve dil istatistikleri GitHub REST API üzerinden canlı çekilir. API rate-limit veya çevrimdışı durumlarına karşı `sessionStorage` önbellekleme (caching) ve statik veri geri dönüşü (*graceful fallback*) mevcuttur.
-- **🌍 Çift Dilli (TR / EN) Reaktif Dil Motoru:** Sayfa yenilemesine gerek kalmadan tüm arayüz metinlerini, tarih formatlarını ve içerikleri Türkçe ve İngilizce arasında anında değiştiren hafif i18n modülü.
-- **🌗 Adaptif Tema Sistemi (Dark / Light):** İşletim sistemi tercihini (`prefers-color-scheme`) algılayan ve kullanıcı seçimini `localStorage` üzerinde kalıcı tutan, CSS değişkenleri (Design Tokens) tabanlı tema motoru.
-- **🍱 Modern Bento Grid & Erişilebilirlik:** Semantik HTML5, klavye erişilebilirliği, duyarlı (responsive) Bento Grid yerleşimi ve sıfır harici çalışma zamanı yükü ile yüksek Lighthouse performansı.
+### ✨ Öne Çıkan Mühendislik ve Tasarım Özellikleri
+- **📐 Anti-"AI Slop" Editorial & 1px Swiss Grid Tasarım Sistemi:** Neon küreler, sahte terminaller veya yuvarlak zıplayan kartlar yerine; `1px` keskin mimari çizgiler, **Sıcak Kağıt (`#f6f5f1`) & Mat Karbon (`#0a0a0b`)** çift teması, editoryal serif (*Instrument Serif / Newsreader*), rasyonel sans (*Inter*) ve teknik monospace (*JetBrains Mono*) tipografi hiyerarşisi ([ADR-002](./docs/decisions/ADR-002-anti-ai-slop-editorial-swiss-grid.md)).
+- **⛩️ Altı Japon Felsefesi İlkesi (Ethos Matrix & Monograph Drawer):** Mühendislik yaklaşımını tanımlayan 6 temel kavramın (*Kaizen* 改善, *Ikigai* 生き甲斐, *Shugyo* 修行, *Gaman* 我慢, *Shikata ga nai* 仕方がない, *Hansei* 反省) `3x2` İsviçre ızgarasında sunulması ve etkileşimli **Monograph Okuma Çekmecesi** ile felsefi/mühendislik yansımalarının incelenebilmesi.
+- **🧱 SOLID & Katmanlı ES6 Modül Mimarisi:** Veri (`data.js`), dış servis (`githubService.js`), durum yönetimi (`themeManager.js`, `localizationManager.js`), görsel sunum (`portfolioRenderer.js`) ve kullanıcı etkileşimi (`interactionController.js`) katmanları birbirinden tamamen izole edilmiştir. Yalnızca `js/data.js` güncellenerek yeni proje, deneyim veya felsefi ilke eklenebilir (*Open/Closed Principle* — [ADR-001](./docs/decisions/ADR-001-modular-portfolio-architecture.md)).
+- **🔄 Canlı GitHub API Senkronizasyonu & Dayanıklılık:** Numaralı proje indeksindeki depo istatistikleri GitHub REST API üzerinden canlı çekilir; API rate-limit veya çevrimdışı durumlarına karşı `sessionStorage` önbellekleme ve statik veri geri dönüşü (*graceful fallback*) mevcuttur.
+- **🌍 Çift Dilli (TR / EN) Reaktif Dil Motoru:** Sayfa yenilemesine gerek kalmadan tüm arayüz metinlerini, teknik indeksleri ve 6 Japon felsefesi monografisini Türkçe ve İngilizce arasında anında değiştiren i18n modülü.
 
 ---
 
 ## 🇬🇧 Overview (English)
 
-This repository hosts the personal engineering portfolio of **Mehmet İhsan Ekinci**, showcasing projects and technical experience across software architecture, computer networks, cybersecurity, and systems engineering, alongside an isolated archive of university coursework.
+This repository hosts the personal engineering portfolio of **Mehmet İhsan Ekinci**, presenting projects and technical experience across software architecture, computer networks, cybersecurity, and systems engineering, alongside an isolated archive of university coursework.
 
-Engineered with a **zero-build, zero-dependency** philosophy, the application leverages native **ES6 Modules**, **strict SOLID principles**, and a modern **Bento Grid** layout deployed directly on GitHub Pages.
+Built with a **zero-build, zero-dependency** philosophy using native **ES6 Modules** and **strict SOLID principles**, the interface deliberately rejects generic "AI Slop" tropes (neon gradients, glassmorphism, floating orbs) in favor of an **Editorial Minimalist + 1px Hairline Swiss Grid** aesthetic, a **Warm Architectural Paper / Matte Carbon** dual palette, and an interactive **Six Japanese Philosophies (Ethos Monograph)** matrix.
 
-### ✨ Key Engineering Highlights
-- **🧱 SOLID & Layered ES6 Module Architecture:** Strict separation of concerns across data configuration (`data.js`), external API integration (`githubService.js`), state management (`themeManager.js`, `localizationManager.js`), DOM rendering (`portfolioRenderer.js`), and UI interactions (`interactionController.js`). Following the *Open/Closed Principle*, adding new projects or experiences requires editing only `js/data.js`.
-- **🔄 Live GitHub API Sync with Graceful Fallback:** Fetches real-time repository metadata via the GitHub REST API, backed by `sessionStorage` caching and automatic static data fallback to guarantee resilience under API rate limits.
-- **🌍 Bilingual (TR / EN) Localization Engine:** Reactive client-side i18n module supporting instant switching between Turkish and English without page reloads.
-- **🌗 Adaptive Dark / Light Theme System:** Powered by CSS custom properties (design tokens), respecting system `prefers-color-scheme` while persisting user overrides in `localStorage`.
-- **🍱 Responsive Bento Grid Layout:** Semantic HTML5 structure, smooth scroll spy via `IntersectionObserver`, and modular CSS delivering near-instant load times.
+### ✨ Key Engineering & Design Highlights
+- **📐 Editorial Minimalist & 1px Swiss Grid System:** Engineered around a 12-column exposed hairline grid (`1px solid`), numbered full-width project index rows, and a refined **Warm Paper (`#f6f5f1`) / Matte Carbon (`#0a0a0b`)** dual theme with vermilion accents ([ADR-002](./docs/decisions/ADR-002-anti-ai-slop-editorial-swiss-grid.md)).
+- **⛩️ Six Japanese Philosophies (Ethos Matrix & Monograph Drawer):** An interactive `3x2` grid exploring *Kaizen* (改善), *Ikigai* (生き甲斐), *Shugyo* (修行), *Gaman* (我慢), *Shikata ga nai* (仕方がない), and *Hansei* (反省), complete with an accessible **Monograph Reading Drawer** detailing how each philosophy informs systems architecture and network security engineering.
+- **🧱 SOLID & Layered ES6 Module Architecture:** Strict separation of concerns across data configuration (`data.js`), external API integration (`githubService.js`), state management (`themeManager.js`, `localizationManager.js`), DOM rendering (`portfolioRenderer.js`), and UI interactions (`interactionController.js`) ([ADR-001](./docs/decisions/ADR-001-modular-portfolio-architecture.md)).
+- **🔄 Live GitHub API Sync with Graceful Fallback:** Real-time repository metadata fetched via the GitHub REST API, backed by `sessionStorage` caching and automatic static fallback.
+- **🌍 Bilingual (TR / EN) Localization Engine:** Reactive client-side i18n module supporting instant switching between Turkish and English across all project rows, timeline entries, and philosophical monographs.
 
 ---
 
@@ -43,25 +44,28 @@ Engineered with a **zero-build, zero-dependency** philosophy, the application le
 
 ```text
 mihsanekinci.github.io/
-├── index.html                  # Ana Single-Page portfolyo giriş noktası (Semantic HTML5)
-├── css/                        # Modüler stil katmanı (Design Tokens, Bento Grid, Bileşenler)
+├── index.html                  # Ana Single-Page portfolyo giriş noktası (Semantic HTML5 & Swiss Grid)
+├── css/                        # Modüler stil katmanı (Editorial Design Tokens, 1px Swiss Grid, Bileşenler)
 ├── js/
 │   ├── app.js                  # Uygulama orkestratörü ve modül başlatıcısı (Bootstrapper)
-│   ├── data.js                 # Tek doğruluk kaynağı (Projeler, deneyimler, TR/EN sözlükleri)
+│   ├── data.js                 # Tek doğruluk kaynağı (Projeler, 6 Japon Felsefesi, deneyimler, TR/EN sözlükleri)
 │   ├── services/
 │   │   └── githubService.js    # GitHub REST API istemcisi, sessionStorage önbellek & fallback
 │   └── modules/
-│       ├── themeManager.js         # Dark/Light tema durumu ve sistem tercihi yönetimi
+│       ├── themeManager.js         # Sıcak Kağıt (Light) / Mat Karbon (Dark) tema durumu yönetimi
 │       ├── localizationManager.js  # TR/EN çoklu dil (i18n) durumu ve reaktif DOM güncellemesi
-│       ├── portfolioRenderer.js    # Bento Grid ve içerik bileşenlerinin saf render motoru
-│       └── interactionController.js# Navigasyon, filtreleme ve IntersectionObserver etkileşimleri
+│       ├── portfolioRenderer.js    # 1px Swiss Grid, Numaralı Proje İndeksi ve Ethos Monograph render motoru
+│       └── interactionController.js# Ethos okuma çekmecesi, navigasyon, filtreleme ve IntersectionObserver
 ├── docs/
 │   └── decisions/
-│       └── ADR-001-modular-portfolio-architecture.md  # Mimari Karar Kaydı (Adaptive ADR)
+│       ├── ADR-001-modular-portfolio-architecture.md      # Modüler ES6 & SOLID Mimari Karar Kaydı
+│       └── ADR-002-anti-ai-slop-editorial-swiss-grid.md   # Editorial Swiss Grid & 6 Japon Felsefesi Karar Kaydı
 └── labs/                       # Arşivlenen Web Programlama Dersi laboratuvar çalışmaları
 ```
 
-> 📑 Mimari tasarım kararları, değerlendirilen alternatifler ve teknik ödünleşimler için [**ADR-001: Modüler Kişisel Mühendislik Portfolyosu Mimarisi**](./docs/decisions/ADR-001-modular-portfolio-architecture.md) belgesini inceleyebilirsiniz.
+### 📑 Mimari Karar Kayıtları (Architecture Decision Records)
+- [**ADR-001:** Modüler Kişisel Mühendislik Portfolyosu Mimarisi ve Ders Laboratuvarlarının Arşivlenmesi](./docs/decisions/ADR-001-modular-portfolio-architecture.md)
+- [**ADR-002:** "AI Slop" Unsurlarının Kaldırılması, Editorial + 1px Swiss Grid Mimarisi ve Altı Japon Felsefesi İlkesi (Ethos)](./docs/decisions/ADR-002-anti-ai-slop-editorial-swiss-grid.md)
 
 ---
 

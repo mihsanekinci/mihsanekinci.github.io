@@ -26,8 +26,11 @@ class PortfolioApplication {
         /** @type {Map<string, Object>} */
         this.githubStatsMap = new Map();
 
-        this.themeManager = new ThemeManager();
         this.localizationManager = new LocalizationManager(this.data.i18n);
+        this.themeManager = new ThemeManager({
+            i18nDictionary: this.data.i18n,
+            initialLang: this.localizationManager.getCurrentLanguage()
+        });
         this.renderer = new PortfolioRenderer(this.data);
         this.interactionController = new InteractionController({
             siteData: this.data,
@@ -36,17 +39,17 @@ class PortfolioApplication {
     }
 
     /**
-     * Uygulamayı başlatır: tema, dil, ilk dinamik render, filtre dinleyicileri ve
-     * arka plan GitHub API senkronizasyonunu çalıştırır.
+     * Uygulamayı başlatır: dil, tema, ilk dinamik render (Bento, Timeline, Projects, Skills, Ethos),
+     * filtre dinleyicileri ve arka plan GitHub API senkronizasyonunu çalıştırır.
      */
     async bootstrap() {
         this.updateFooterYear();
 
-        // 1. Tema ve Dil motorlarını başlat
-        this.themeManager.init();
+        // 1. Dil ve Tema motorlarını başlat
         this.localizationManager.init();
+        this.themeManager.init();
 
-        // 2. İlk senkron bileşen render işlemi
+        // 2. İlk senkron bileşen render işlemi (Ethos Grid + Monograph Drawer dahil)
         const initialLang = this.localizationManager.getCurrentLanguage();
         this.renderer.renderAll(
             initialLang,
@@ -54,20 +57,22 @@ class PortfolioApplication {
             this.githubStatsMap
         );
 
-        // 3. Dil değiştiğinde dinamik bileşenleri yeniden render et (Observer deseni)
+        // 3. Dil değiştiğinde dinamik bileşenleri ve tema buton etiketini yeniden güncelle (Observer)
         this.localizationManager.onLanguageChange((newLang) => {
+            const validLang = /** @type {'tr'|'en'} */ (newLang);
+            this.themeManager.setLanguage(validLang);
             this.renderer.renderAll(
-                /** @type {'tr'|'en'} */ (newLang),
+                validLang,
                 this.activeProjectFilter,
                 this.githubStatsMap
             );
         });
 
-        // 4. Proje kategori filtrelerini ve genel etkileşim kontrolcüsünü bağla
+        // 4. Proje kategori filtrelerini ve genel etkileşim kontrolcüsünü (Ethos Drawer dahil) bağla
         this.initProjectFilterButtons();
         this.interactionController.init();
 
-        // 5. Arka planda canlı GitHub verilerini çek ve proje kartlarını güncelle
+        // 5. Arka planda canlı GitHub verilerini çek ve proje satırlarını güncelle
         await this.syncGitHubMetadata();
     }
 
@@ -122,7 +127,7 @@ class PortfolioApplication {
 
     /**
      * GitHub API üzerinden kullanıcının repo istatistiklerini çeker ve
-     * mevcut dil/filtre durumunu koruyarak proje kartlarını günceller.
+     * mevcut dil/filtre durumunu koruyarak proje satırlarını günceller.
      */
     async syncGitHubMetadata() {
         const githubUser = this.data?.profile?.githubUser || 'mihsanekinci';

@@ -1,8 +1,9 @@
 /**
- * @fileoverview Dinamik Portfolyo Bileşenleri Render Motoru.
- * Single Responsibility: siteData verilerini ve canlı GitHub API istatistiklerini
- * alarak Bento Highlights, Deneyim/Eğitim Zaman Çizelgesi, Proje Kartları ve
- * Teknik Yetkinlik (Skill) Kartlarını güvenli ve semantik biçimde DOM'a render eder.
+ * @fileoverview Editorial Minimalist & 1px Swiss Grid Portfolyo Render Motoru.
+ * Single Responsibility: siteData verilerini ve canlı GitHub API istatistiklerini alarak
+ * Bento Highlights, Deneyim/Eğitim Zaman Çizelgesi, Teknik Proje İndeks Satırları (.project-row),
+ * Yetkinlik Matrisi (.skill-card) ve 6 Japon İlkesi (Ethos Grid + Monograph Drawer) bileşenlerini
+ * sıfır emoji ve XSS korumalı semantik HTML ile render eder.
  */
 
 /**
@@ -51,6 +52,8 @@ export class PortfolioRenderer {
      * @param {string} [selectors.timeline='#timelineContainer']
      * @param {string} [selectors.projects='#projectsGrid']
      * @param {string} [selectors.skills='#skillsGrid']
+     * @param {string} [selectors.ethosGrid='#ethosGrid']
+     * @param {string} [selectors.ethosDrawerBody='#ethosDrawerBody']
      */
     constructor(
         siteData,
@@ -58,7 +61,9 @@ export class PortfolioRenderer {
             bentoList = '#bentoHighlightsList',
             timeline = '#timelineContainer',
             projects = '#projectsGrid',
-            skills = '#skillsGrid'
+            skills = '#skillsGrid',
+            ethosGrid = '#ethosGrid',
+            ethosDrawerBody = '#ethosDrawerBody'
         } = {}
     ) {
         this.siteData = siteData;
@@ -66,7 +71,9 @@ export class PortfolioRenderer {
             bentoList,
             timeline,
             projects,
-            skills
+            skills,
+            ethosGrid,
+            ethosDrawerBody
         };
     }
 
@@ -82,6 +89,7 @@ export class PortfolioRenderer {
         this.renderTimeline(lang);
         this.renderProjects(lang, filterCategory, githubStatsMap);
         this.renderSkills(lang);
+        this.renderEthos(lang);
     }
 
     /**
@@ -109,7 +117,7 @@ export class PortfolioRenderer {
     }
 
     /**
-     * #timelineContainer içine siteData.timeline öğelerini .timeline-item kartları olarak render eder.
+     * #timelineContainer içine siteData.timeline öğelerini .timeline-item satırları olarak render eder.
      *
      * @param {'tr'|'en'} lang - Aktif dil kodu
      */
@@ -126,7 +134,8 @@ export class PortfolioRenderer {
         }
 
         container.innerHTML = items
-            .map((item) => {
+            .map((item, idx) => {
+                const indexCode = String(idx + 1).padStart(2, '0');
                 const period = escapeHtml(resolveLocalizedField(item.period, lang));
                 const role = escapeHtml(resolveLocalizedField(item.role, lang));
                 const organization = escapeHtml(resolveLocalizedField(item.organization, lang));
@@ -142,14 +151,16 @@ export class PortfolioRenderer {
 
                 return `
                     <article class="timeline-item" data-type="${itemType}">
-                        <div class="timeline-marker" aria-hidden="true"></div>
+                        <div class="timeline-meta">
+                            <span class="timeline-index">02.${indexCode}</span>
+                            <span class="timeline-period">${period}</span>
+                            <span class="timeline-location">${location}</span>
+                        </div>
                         <div class="timeline-content">
                             <div class="timeline-header">
-                                <span class="timeline-period">${period}</span>
-                                <span class="timeline-location">📍 ${location}</span>
+                                <h3 class="timeline-role">${role}</h3>
+                                <span class="timeline-org">${organization}</span>
                             </div>
-                            <h3 class="timeline-role">${role}</h3>
-                            <div class="timeline-org">${organization}</div>
                             <p class="timeline-desc">${description}</p>
                             <div class="timeline-tags project-tech">${tagsHtml}</div>
                         </div>
@@ -161,7 +172,7 @@ export class PortfolioRenderer {
 
     /**
      * #projectsGrid içine siteData.projects öğelerini kategoriye göre filtreleyerek
-     * ve GitHub canlı istatistikleriyle zenginleştirerek .project-card olarak render eder.
+     * tam genişlikte teknik indeks satırı (.project-row.project-card) olarak render eder.
      *
      * @param {'tr'|'en'} lang - Aktif dil kodu
      * @param {string} [filterCategory='all'] - Kategori filtresi ('all', 'network', 'systems', 'web', 'ai')
@@ -185,10 +196,11 @@ export class PortfolioRenderer {
 
         const i18n = this.siteData?.i18n?.[lang] || this.siteData?.i18n?.tr;
         const viewCodeLabel = escapeHtml(i18n?.projects?.viewCode || 'Source Code');
-        const liveSyncNote = escapeHtml(i18n?.projects?.liveSyncNote || 'GitHub');
+        const liveSyncNote = escapeHtml(i18n?.projects?.liveSyncNote || 'GitHub API');
 
         container.innerHTML = filteredProjects
-            .map((project) => {
+            .map((project, index) => {
+                const indexCode = String(index + 1).padStart(2, '0');
                 const badge = escapeHtml(project.badge || project.category);
                 const title = escapeHtml(project.title);
                 const description = escapeHtml(resolveLocalizedField(project.description, lang));
@@ -202,7 +214,7 @@ export class PortfolioRenderer {
                           githubStatsMap.get(String(repoKey).toLowerCase())
                         : null;
 
-                let headerStatText = 'GitHub ↗';
+                let headerStatText = '';
                 let footerMetaText = liveSyncNote;
 
                 if (ghStats) {
@@ -220,12 +232,16 @@ export class PortfolioRenderer {
                         metaParts.push(`★ ${ghStats.stars}`);
                     }
                     if (ghStats.forks > 0) {
-                        metaParts.push(`⑂ ${ghStats.forks}`);
+                        metaParts.push(`FORKS: ${ghStats.forks}`);
                     }
                     if (metaParts.length > 0) {
                         footerMetaText = metaParts.join(' · ');
                     }
                 }
+
+                const techListSummary = Array.isArray(project.tech)
+                    ? escapeHtml(project.tech.slice(0, 3).join(' / '))
+                    : '';
 
                 const techTagsHtml = Array.isArray(project.tech)
                     ? project.tech
@@ -233,18 +249,30 @@ export class PortfolioRenderer {
                           .join('')
                     : '';
 
+                const statBadgeHtml = headerStatText
+                    ? `<span class="project-gh-stat">${headerStatText}</span>`
+                    : '';
+
                 return `
-                    <article class="project-card" data-category="${category}">
-                        <div class="project-header">
-                            <span class="project-badge">${badge}</span>
-                            <span class="project-gh-stat">${headerStatText}</span>
+                    <article class="project-row project-card" data-category="${category}">
+                        <div class="project-row-top project-header">
+                            <div class="project-row-title-group">
+                                <span class="project-index">${indexCode}</span>
+                                <h3 class="project-title">${title}</h3>
+                                <span class="project-badge">${badge}</span>
+                            </div>
+                            <div class="project-row-actions">
+                                <span class="project-tech-summary">${techListSummary}</span>
+                                ${statBadgeHtml}
+                                <a href="${url}" target="_blank" rel="noopener noreferrer" class="project-link">${viewCodeLabel} ↗</a>
+                            </div>
                         </div>
-                        <h3 class="project-title">${title}</h3>
-                        <p class="project-desc">${description}</p>
-                        <div class="project-tech">${techTagsHtml}</div>
-                        <div class="project-footer">
-                            <span class="project-repo-status">${footerMetaText}</span>
-                            <a href="${url}" target="_blank" rel="noopener noreferrer" class="project-link">${viewCodeLabel} ↗</a>
+                        <div class="project-row-bottom">
+                            <p class="project-desc">${description}</p>
+                            <div class="project-footer">
+                                <div class="project-tech">${techTagsHtml}</div>
+                                <span class="project-repo-status">${footerMetaText}</span>
+                            </div>
                         </div>
                     </article>
                 `;
@@ -253,7 +281,7 @@ export class PortfolioRenderer {
     }
 
     /**
-     * #skillsGrid içine siteData.skillCategories verilerini .skill-card olarak render eder.
+     * #skillsGrid içine siteData.skillCategories verilerini 04.1..04.4 kodlu .skill-card olarak render eder.
      *
      * @param {'tr'|'en'} lang - Aktif dil kodu
      */
@@ -270,8 +298,8 @@ export class PortfolioRenderer {
         }
 
         container.innerHTML = categories
-            .map((category) => {
-                const icon = escapeHtml(category.icon || '⚡');
+            .map((category, idx) => {
+                const code = escapeHtml(category.code || `04.${idx + 1}`);
                 const title = escapeHtml(resolveLocalizedField(category.title, lang));
                 const pillsHtml = Array.isArray(category.skills)
                     ? category.skills
@@ -282,7 +310,7 @@ export class PortfolioRenderer {
                 return `
                     <article class="skill-card">
                         <div class="skill-card-header">
-                            <span class="skill-icon" aria-hidden="true">${icon}</span>
+                            <span class="skill-code">${code}</span>
                             <h3 class="skill-title">${title}</h3>
                         </div>
                         <div class="skill-pills">${pillsHtml}</div>
@@ -290,5 +318,88 @@ export class PortfolioRenderer {
                 `;
             })
             .join('');
+    }
+
+    /**
+     * #ethosGrid içine 6 Japon felsefesi ilkesini (.ethos-cell) ve
+     * #ethosDrawerBody içine detaylı monografi maddelerini (.ethos-monograph-item) render eder.
+     *
+     * @param {'tr'|'en'} lang - Aktif dil kodu
+     */
+    renderEthos(lang) {
+        const ethosItems = Array.isArray(this.siteData?.ethos) ? this.siteData.ethos : [];
+        const i18nEthos =
+            this.siteData?.i18n?.[lang]?.ethos || this.siteData?.i18n?.tr?.ethos || {};
+        const readMoreLabel = escapeHtml(i18nEthos.readMore || 'Deep Dive →');
+        const engineeringLabel = escapeHtml(
+            i18nEthos.engineeringLabel || 'ENGINEERING REFLECTION'
+        );
+
+        const gridContainer = document.querySelector(this.selectors.ethosGrid);
+        if (gridContainer) {
+            gridContainer.innerHTML = ethosItems
+                .map((item) => {
+                    const id = escapeHtml(item.id);
+                    const code = escapeHtml(item.code);
+                    const name = escapeHtml(item.name);
+                    const kanji = escapeHtml(item.kanji);
+                    const subtitle = escapeHtml(resolveLocalizedField(item.subtitle, lang));
+                    const summary = escapeHtml(resolveLocalizedField(item.summary, lang));
+
+                    return `
+                        <article
+                            class="ethos-cell"
+                            data-ethos-id="${id}"
+                            tabindex="0"
+                            role="button"
+                            aria-label="${code} ${name} — ${subtitle}"
+                        >
+                            <div class="ethos-cell-top">
+                                <span class="ethos-code-name">${code} / ${name}</span>
+                                <span class="ethos-kanji" lang="ja">${kanji}</span>
+                            </div>
+                            <h3 class="ethos-subtitle">${subtitle}</h3>
+                            <p class="ethos-summary">${summary}</p>
+                            <span class="ethos-read-more">${readMoreLabel}</span>
+                        </article>
+                    `;
+                })
+                .join('');
+        }
+
+        const drawerBody = document.querySelector(this.selectors.ethosDrawerBody);
+        if (drawerBody) {
+            drawerBody.innerHTML = ethosItems
+                .map((item) => {
+                    const id = escapeHtml(item.id);
+                    const code = escapeHtml(item.code);
+                    const name = escapeHtml(item.name);
+                    const kanji = escapeHtml(item.kanji);
+                    const pronunciation = escapeHtml(item.pronunciation || '');
+                    const subtitle = escapeHtml(resolveLocalizedField(item.subtitle, lang));
+                    const deepDive = escapeHtml(resolveLocalizedField(item.deepDive, lang));
+                    const engineeringReflection = escapeHtml(
+                        resolveLocalizedField(item.engineeringReflection, lang)
+                    );
+
+                    return `
+                        <article class="ethos-monograph-item" id="monograph-${id}" data-ethos-id="${id}">
+                            <header class="ethos-monograph-header">
+                                <div class="ethos-monograph-title-group">
+                                    <span class="ethos-monograph-code">${code} // ${name} [${pronunciation}]</span>
+                                    <h3 class="ethos-monograph-subtitle">${subtitle}</h3>
+                                </div>
+                                <span class="ethos-monograph-kanji" lang="ja" aria-hidden="true">${kanji}</span>
+                            </header>
+                            <p class="ethos-monograph-text">${deepDive}</p>
+                            <div class="ethos-engineering-box">
+                                <span class="ethos-engineering-label">${engineeringLabel}</span>
+                                <p class="ethos-engineering-desc">${engineeringReflection}</p>
+                            </div>
+                        </article>
+                    `;
+                })
+                .join('');
+        }
     }
 }

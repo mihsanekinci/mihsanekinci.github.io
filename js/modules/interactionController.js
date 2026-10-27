@@ -1,7 +1,7 @@
 /**
- * @fileoverview Kullanıcı Etkileşimleri, Pano Kopyalama, İletişim Formu ve Navigasyon Kontrolcüsü.
- * Single Responsibility: E-posta kopyalama ve bildirim (Toast), hızlı mesaj (mailto) oluşturucu,
- * mobil navigasyon menüsü ve IntersectionObserver tabanlı Scroll-Spy işlemlerini yönetir.
+ * @fileoverview Kullanıcı Etkileşimleri, Ethos Monografi Çekmecesi, Pano, Form ve Navigasyon Kontrolcüsü.
+ * Single Responsibility: Ethos okuma çekmecesi (#ethosDrawer), e-posta kopyalama ve Toast bildirimi,
+ * hızlı mesaj (mailto) oluşturucu, mobil navigasyon menüsü ve Scroll-Spy işlemlerini yönetir.
  */
 
 export class InteractionController {
@@ -15,6 +15,8 @@ export class InteractionController {
         this.localizationManager = localizationManager;
         /** @type {ReturnType<typeof setTimeout>|null} */
         this.toastTimeoutId = null;
+        /** @type {ReturnType<typeof setTimeout>|null} */
+        this.highlightTimeoutId = null;
         /** @type {IntersectionObserver|null} */
         this.scrollSpyObserver = null;
     }
@@ -26,7 +28,143 @@ export class InteractionController {
         this.initCopyEmailButtons();
         this.initQuickContactForm();
         this.initMobileNavigation();
+        this.initEthosDrawer();
         this.initScrollSpy();
+    }
+
+    /**
+     * #openEthosDrawerBtn, .ethos-cell, #closeEthosDrawerBtn ve #ethosDrawerBackdrop
+     * üzerinden Altı Japon İlkesi monografi çekmecesini yönetir.
+     */
+    initEthosDrawer() {
+        const drawer = document.querySelector('#ethosDrawer');
+        const backdrop = document.querySelector('#ethosDrawerBackdrop');
+        const openBtn = document.querySelector('#openEthosDrawerBtn');
+        const closeBtn = document.querySelector('#closeEthosDrawerBtn');
+        const ethosGrid = document.querySelector('#ethosGrid');
+
+        const openDrawer = (targetEthosId = null) => {
+            if (!drawer) {
+                return;
+            }
+
+            drawer.classList.add('active');
+            drawer.setAttribute('aria-hidden', 'false');
+
+            if (backdrop) {
+                backdrop.classList.add('active');
+                backdrop.setAttribute('aria-hidden', 'false');
+            }
+
+            document.body.style.overflow = 'hidden';
+
+            // Varsa önceki vurgulamaları temizle
+            drawer
+                .querySelectorAll('.ethos-monograph-item.highlighted')
+                .forEach((el) => el.classList.remove('highlighted'));
+
+            if (targetEthosId) {
+                const targetItem = drawer.querySelector(`#monograph-${targetEthosId}`);
+                if (targetItem) {
+                    targetItem.classList.add('highlighted');
+
+                    requestAnimationFrame(() => {
+                        targetItem.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    });
+
+                    if (this.highlightTimeoutId) {
+                        clearTimeout(this.highlightTimeoutId);
+                    }
+                    this.highlightTimeoutId = setTimeout(() => {
+                        targetItem.classList.remove('highlighted');
+                        this.highlightTimeoutId = null;
+                    }, 3500);
+                }
+            } else {
+                const drawerBody = drawer.querySelector('#ethosDrawerBody');
+                if (drawerBody) {
+                    drawerBody.scrollTop = 0;
+                }
+            }
+        };
+
+        const closeDrawer = () => {
+            if (!drawer) {
+                return;
+            }
+
+            drawer.classList.remove('active');
+            drawer.setAttribute('aria-hidden', 'true');
+
+            if (backdrop) {
+                backdrop.classList.remove('active');
+                backdrop.setAttribute('aria-hidden', 'true');
+            }
+
+            document.body.style.overflow = '';
+        };
+
+        if (openBtn) {
+            openBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                openDrawer(null);
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                closeDrawer();
+            });
+        }
+
+        if (backdrop) {
+            backdrop.addEventListener('click', () => {
+                closeDrawer();
+            });
+        }
+
+        // Event delegation: dil değişiminde yeniden render edilen .ethos-cell elemanlarını yakalar
+        const gridRoot = ethosGrid || document;
+        gridRoot.addEventListener('click', (event) => {
+            const target = /** @type {HTMLElement|null} */ (event.target);
+            if (!target) {
+                return;
+            }
+            const cell = target.closest('.ethos-cell');
+            if (!cell) {
+                return;
+            }
+            const ethosId = cell.getAttribute('data-ethos-id');
+            openDrawer(ethosId);
+        });
+
+        gridRoot.addEventListener('keydown', (event) => {
+            const keyEvent = /** @type {KeyboardEvent} */ (event);
+            if (keyEvent.key !== 'Enter' && keyEvent.key !== ' ') {
+                return;
+            }
+            const target = /** @type {HTMLElement|null} */ (keyEvent.target);
+            if (!target) {
+                return;
+            }
+            const cell = target.closest('.ethos-cell');
+            if (!cell) {
+                return;
+            }
+            keyEvent.preventDefault();
+            const ethosId = cell.getAttribute('data-ethos-id');
+            openDrawer(ethosId);
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && drawer?.classList.contains('active')) {
+                closeDrawer();
+            }
+        });
     }
 
     /**
@@ -169,7 +307,7 @@ export class InteractionController {
                 : 'tr';
 
             const defaultSubject =
-                lang === 'en' ? 'Portfolio Contact' : 'Portfolyo İletişim';
+                lang === 'en' ? 'Portfolio Correspondence' : 'Portfolyo İletişim';
             const composedSubject = senderName
                 ? `[${subjectText || defaultSubject}] — ${senderName}`
                 : subjectText || defaultSubject;
