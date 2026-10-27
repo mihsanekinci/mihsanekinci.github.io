@@ -125,6 +125,7 @@ button {
     align-items: center;
     gap: 10px;
     min-width: 0;
+    flex-shrink: 0;
 }
 
 .brand-logo {
@@ -148,16 +149,25 @@ button {
 }
 
 .status-indicator {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--text-secondary);
-    white-space: nowrap;
+    color: var(--accent-primary);
+    white-space: normal;
+    line-height: 1.4;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+}
+
+.status-indicator .status-dot {
+    margin-top: 4px;
+    flex-shrink: 0;
 }
 
 .status-dot {
@@ -165,6 +175,7 @@ button {
     height: 6px;
     background-color: var(--accent-primary);
     display: inline-block;
+    flex-shrink: 0;
 }
 
 .nav-links {
@@ -201,6 +212,7 @@ button {
     display: flex;
     align-items: center;
     gap: 6px;
+    flex-shrink: 0;
 }
 
 .spec-btn,
@@ -1429,8 +1441,7 @@ button {
 /* ==========================================================================
    Responsive Breakpoints
    ========================================================================== */
-@media (max-width: 960px) {
-    .status-indicator,
+@media (max-width: 1000px) {
     .spec-divider {
         display: none;
     }
