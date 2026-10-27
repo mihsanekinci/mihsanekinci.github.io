@@ -19,6 +19,29 @@ export const siteData = {
         }
     },
 
+    mascotQuotes: {
+        tr: [
+            "改善 (Kaizen): Her gün %1 daha temiz kod!",
+            "生き甲斐 (Ikigai): Sevdiğin iş ve değer üreten mühendislik.",
+            "修行 (Shugyo): Temellere in; tavizsiz mühendislik disiplini.",
+            "我慢 (Gaman): Karmaşık hata ayıklamada sabır ve metanet.",
+            "仕方がない (Shikata ga nai): Değiştiremeyeceğine takılma, çözüme odaklan.",
+            "反省 (Hansei): Hatalarından dürüstçe öğren; Kaizen'in anahtarı!",
+            "Git Status: Branch main — 0 error, 0 warning ✓",
+            "Kitsune 狐: Çevik zekâ, keskin odak!"
+        ],
+        en: [
+            "改善 (Kaizen): 1% cleaner code every single day!",
+            "生き甲斐 (Ikigai): Passion, mastery, and purposeful craft.",
+            "修行 (Shugyo): Deep discipline; understand the fundamentals.",
+            "我慢 (Gaman): Patient perseverance through tough bugs.",
+            "仕方がない (Shikata ga nai): Focus solely on what you can control.",
+            "反省 (Hansei): Honest reflection is the catalyst for growth!",
+            "Git Status: Branch main — 0 errors, 0 warnings ✓",
+            "Kitsune 狐: Agile intellect and sharp focus!"
+        ]
+    },
+
     i18n: {
         tr: {
             nav: {

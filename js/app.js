@@ -2,7 +2,8 @@
  * @fileoverview Application Bootstrapper & Dependency Injection Orchestrator.
  * Single Responsibility: Veri katmanı (siteData), servis katmanı (githubService) ve
  * UI/Uygulama modüllerini (ThemeManager, LocalizationManager, PortfolioRenderer,
- * InteractionController) Dependency Inversion prensibiyle birleştirir ve yaşam döngüsünü yönetir.
+ * InteractionController, MascotController) Dependency Inversion prensibiyle birleştirir
+ * ve yaşam döngüsünü yönetir.
  */
 
 import { siteData } from './data.js';
@@ -11,6 +12,7 @@ import { ThemeManager } from './modules/themeManager.js';
 import { LocalizationManager } from './modules/localizationManager.js';
 import { PortfolioRenderer } from './modules/portfolioRenderer.js';
 import { InteractionController } from './modules/interactionController.js';
+import { MascotController } from './modules/mascotController.js';
 
 class PortfolioApplication {
     /**
@@ -21,6 +23,7 @@ class PortfolioApplication {
     constructor({ data, repoFetcher }) {
         this.data = data;
         this.repoFetcher = repoFetcher;
+        this.siteData = data;
 
         this.activeProjectFilter = 'all';
         /** @type {Map<string, Object>} */
@@ -36,11 +39,15 @@ class PortfolioApplication {
             siteData: this.data,
             localizationManager: this.localizationManager
         });
+        this.mascotController = new MascotController(
+            this.siteData,
+            this.localizationManager
+        );
     }
 
     /**
      * Uygulamayı başlatır: dil, tema, ilk dinamik render (Bento, Timeline, Projects, Skills, Ethos),
-     * filtre dinleyicileri ve arka plan GitHub API senkronizasyonunu çalıştırır.
+     * filtre dinleyicileri, Kitsune maskot kontrolcüsü ve arka plan GitHub API senkronizasyonunu çalıştırır.
      */
     async bootstrap() {
         this.updateFooterYear();
@@ -68,12 +75,20 @@ class PortfolioApplication {
             );
         });
 
-        // 4. Proje kategori filtrelerini ve genel etkileşim kontrolcüsünü (Ethos Drawer dahil) bağla
+        // 4. Proje kategori filtrelerini, genel etkileşim kontrolcüsünü ve Kitsune maskotunu bağla
         this.initProjectFilterButtons();
         this.interactionController.init();
+        this.mascotController.init();
 
         // 5. Arka planda canlı GitHub verilerini çek ve proje satırlarını güncelle
         await this.syncGitHubMetadata();
+    }
+
+    /**
+     * bootstrap() için uyumluluk takma adı (alias).
+     */
+    async init() {
+        return this.bootstrap();
     }
 
     /**
