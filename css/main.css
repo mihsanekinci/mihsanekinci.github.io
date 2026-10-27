@@ -129,6 +129,9 @@ button {
 }
 
 .brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-family: var(--font-mono);
     font-size: 0.8rem;
     font-weight: 700;
@@ -140,6 +143,17 @@ button {
 
 .brand-logo:hover {
     color: var(--accent-primary);
+}
+
+.brand-avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background-color: #000;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: inline-block;
 }
 
 .spec-divider {
@@ -347,6 +361,56 @@ button {
     line-height: 1.6;
     padding-top: 10px;
     border-top: 1px solid var(--border-color);
+}
+
+/* Kitsune Mascot Badge */
+.mascot-badge {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px;
+    margin-top: 14px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+}
+
+.mascot-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background-color: #000;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.mascot-info {
+    min-width: 0;
+}
+
+.mascot-name {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.mascot-kanji {
+    font-size: 0.75rem;
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
+.mascot-desc {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    margin-top: 2px;
 }
 
 /* Right Content Column (9 cols) */
@@ -1194,6 +1258,18 @@ button {
     font-size: 0.78rem;
     font-weight: 600;
     color: var(--text-primary);
+}
+
+.footer-mascot {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    border: 1px solid var(--border-color);
+    background-color: #000;
+    object-fit: cover;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
 }
 
 .footer-built {

@@ -18,7 +18,7 @@
     <meta property="og:title" content="Mehmet İhsan Ekinci — Sistem, Ağ Güvenliği &amp; Yazılım Mühendisliği">
     <meta property="og:description"
         content="Ağ ve siber güvenlik mimarileri, Linux sistem programlama, temiz yazılım prensipleri (SOLID) ve modern web teknolojileri kesişiminde mühendislik çözümleri.">
-    <meta property="og:image" content="https://mihsanekinci.github.io/assets/logo.png">
+    <meta property="og:image" content="https://mihsanekinci.github.io/assets/fox.png">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
@@ -26,8 +26,10 @@
     <meta name="twitter:description"
         content="Ağ güvenliği, Linux sistem programlama (C/epoll), TypeScript, Python ve SOLID yazılım mimarileri portfolyosu.">
 
-    <!-- Favicon -->
-    <link rel="icon" href="assets/logo.png" type="image/png">
+    <!-- Favicon & Apple Touch Icon -->
+    <link rel="icon" href="assets/fox-favicon.png" type="image/png">
+    <link rel="icon" sizes="64x64" href="assets/fox-favicon-64.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
     <!-- Google Fonts: Inter & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,7 +48,10 @@
         <nav class="navbar" aria-label="Ana Navigasyon">
             <div class="nav-brand">
                 <span class="status-dot" aria-hidden="true"></span>
-                <a href="#hero" class="brand-logo">MEHMET İHSAN EKİNCİ</a>
+                <a href="#hero" class="brand-logo" aria-label="Mehmet İhsan Ekinci Ana Sayfa">
+                    <img src="assets/fox-favicon-64.png" alt="MİE Fox Mascot" class="brand-avatar" />
+                    <span>MEHMET İHSAN EKİNCİ</span>
+                </a>
             </div>
 
             <div id="navLinks" class="nav-links">
@@ -90,6 +95,13 @@
                         <span class="status-dot" aria-hidden="true"></span>
                         <span data-i18n="nav.status">MÜHENDİSLİK PROJELERİNE AÇIK</span>
                     </span>
+                    <div class="mascot-badge" aria-label="Mühendislik Maskotu: Kitsune">
+                        <img src="assets/fox-favicon-64.png" alt="Kitsune" class="mascot-img" />
+                        <div class="mascot-info">
+                            <div class="mascot-name">KİTSUNE <span class="mascot-kanji">狐</span></div>
+                            <div class="mascot-desc" data-i18n="hero.mascotDesc">Çevik, meraklı ve sistemin derinliklerine inen mühendislik maskotu.</div>
+                        </div>
+                    </div>
                 </div>
             </aside>
 
@@ -477,6 +489,7 @@
         <div class="footer-inner">
             <div class="footer-left">
                 <p class="footer-copy">
+                    <img src="assets/fox-favicon-64.png" alt="Kitsune" class="footer-mascot" />
                     &copy; <span id="currentYear" data-current-year>2026</span> Mehmet İhsan Ekinci —
                     <span data-i18n="footer.rights">Tüm hakları saklıdır.</span>
                 </p>

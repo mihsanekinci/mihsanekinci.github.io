@@ -43,6 +43,7 @@ export const siteData = {
                 ctaContact: "İletişim",
                 copyEmail: "E-postayı Kopyala",
                 copied: "Kopyalandı",
+                mascotDesc: "Çevik, meraklı ve sistemin derinliklerine inen mühendislik maskotu.",
                 terminalTitle: "mie@workstation: ~",
                 stats: {
                     focus: "ODAK ALANLARI",
@@ -160,6 +161,7 @@ export const siteData = {
                 ctaContact: "Contact",
                 copyEmail: "Copy Email",
                 copied: "Copied",
+                mascotDesc: "Curious, agile, and deep-diving engineering mascot.",
                 terminalTitle: "mie@workstation: ~",
                 stats: {
                     focus: "CORE FOCUS",
