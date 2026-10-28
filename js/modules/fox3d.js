@@ -10,8 +10,8 @@ export class Fox3DController {
         this.isInitialized = false;
         this.isDragging = false;
         this.prevMouseX = 0;
-        this.baseRotY = 0.55;
-        this.targetRotY = 0.55;
+        this.baseRotY = 0.45;
+        this.targetRotY = 0.45;
         this.targetHeadX = 0;
         this.targetHeadY = 0;
         this.spinVelocity = 0;
@@ -34,8 +34,8 @@ export class Fox3DController {
         this.scene = new THREE.Scene();
 
         this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-        this.camera.position.set(0, 0.95, 3.8);
-        this.camera.lookAt(0, 0.85, 0);
+        this.camera.position.set(0, 0.70, 3.9);
+        this.camera.lookAt(0, 0.58, 0);
 
         // 2. Renderer
         this.renderer = new THREE.WebGLRenderer({
@@ -92,8 +92,8 @@ export class Fox3DController {
                 this.foxGroup.visible = false;
 
                 this.gltfScene = gltf.scene;
-                this.gltfScene.scale.set(0.033, 0.033, 0.033);
-                this.gltfScene.position.set(0.18, -0.40, -0.1);
+                this.gltfScene.scale.set(0.021, 0.021, 0.021);
+                this.gltfScene.position.set(0.0, -0.32, 0);
                 this.gltfScene.rotation.y = this.baseRotY;
                 this.scene.add(this.gltfScene);
 
@@ -229,9 +229,6 @@ export class Fox3DController {
 
         window.addEventListener('pointermove', (e) => {
             if (!this.canvas) return;
-            const rect = this.canvas.getBoundingClientRect();
-            const mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-            const mouseY = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
 
             const activeTarget = this.gltfScene || this.foxGroup;
 
@@ -242,12 +239,16 @@ export class Fox3DController {
                 this.targetRotY = this.baseRotY;
                 this.prevMouseX = e.clientX;
             } else {
-                this.targetHeadY = Math.max(-0.6, Math.min(0.6, mouseX * 0.5));
-                this.targetHeadX = Math.max(-0.4, Math.min(0.4, -mouseY * 0.35));
+                // Ekran genelinde yumuşak normalizasyon (-1 ile +1 arası)
+                const screenNormX = Math.max(-1, Math.min(1, (e.clientX / window.innerWidth) * 2 - 1));
+                const screenNormY = Math.max(-1, Math.min(1, (e.clientY / window.innerHeight) * 2 - 1));
 
-                // GLB için hafif tüm vücut açısı
+                this.targetHeadY = screenNormX * 0.45;
+                this.targetHeadX = -screenNormY * 0.3;
+
+                // Tilkinin farenin olduğu tarafa merakla hafifçe dönmesi (kontrollü açı)
                 if (this.gltfScene) {
-                    this.targetRotY = this.baseRotY + mouseX * 0.35;
+                    this.targetRotY = this.baseRotY + screenNormX * 0.35;
                 }
             }
         });
