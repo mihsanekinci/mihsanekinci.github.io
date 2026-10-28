@@ -397,9 +397,9 @@ button {
 
 .mascot-badge {
     display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    padding: 10px;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 12px;
     margin-top: 14px;
     background-color: var(--bg-primary);
     border: 1px solid var(--border-color);
@@ -417,8 +417,8 @@ button {
 }
 
 .mascot-avatar-container {
-    width: 58px;
-    height: 58px;
+    width: 72px;
+    height: 72px;
     border-radius: 4px;
     border: 1px solid var(--border-color);
     background-color: #0a0a0b;
@@ -484,6 +484,7 @@ button {
 
 .mascot-info {
     min-width: 0;
+    flex: 1;
 }
 
 .mascot-name {

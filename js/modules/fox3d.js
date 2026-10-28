@@ -10,7 +10,8 @@ export class Fox3DController {
         this.isInitialized = false;
         this.isDragging = false;
         this.prevMouseX = 0;
-        this.targetRotY = 0;
+        this.baseRotY = 0.55;
+        this.targetRotY = 0.55;
         this.targetHeadX = 0;
         this.targetHeadY = 0;
         this.spinVelocity = 0;
@@ -33,7 +34,8 @@ export class Fox3DController {
         this.scene = new THREE.Scene();
 
         this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-        this.camera.position.set(0, 1.25, 4.8);
+        this.camera.position.set(0, 0.95, 3.8);
+        this.camera.lookAt(0, 0.85, 0);
 
         // 2. Renderer
         this.renderer = new THREE.WebGLRenderer({
@@ -59,6 +61,7 @@ export class Fox3DController {
 
         // 4. Model Construction (Instant procedural model)
         this.foxGroup = new THREE.Group();
+        this.foxGroup.position.set(0, -0.2, 0);
         this.scene.add(this.foxGroup);
         this.buildProceduralFox(THREE);
 
@@ -89,8 +92,9 @@ export class Fox3DController {
                 this.foxGroup.visible = false;
 
                 this.gltfScene = gltf.scene;
-                this.gltfScene.scale.set(0.016, 0.016, 0.016);
-                this.gltfScene.position.set(0, 0.1, 0);
+                this.gltfScene.scale.set(0.033, 0.033, 0.033);
+                this.gltfScene.position.set(0.18, -0.40, -0.1);
+                this.gltfScene.rotation.y = this.baseRotY;
                 this.scene.add(this.gltfScene);
 
                 // İskelet animasyonlarını kur
@@ -233,7 +237,9 @@ export class Fox3DController {
 
             if (this.isDragging) {
                 const delta = e.clientX - this.prevMouseX;
-                activeTarget.rotation.y += delta * 0.018;
+                this.baseRotY += delta * 0.018;
+                activeTarget.rotation.y = this.baseRotY;
+                this.targetRotY = this.baseRotY;
                 this.prevMouseX = e.clientX;
             } else {
                 this.targetHeadY = Math.max(-0.6, Math.min(0.6, mouseX * 0.5));
@@ -241,7 +247,7 @@ export class Fox3DController {
 
                 // GLB için hafif tüm vücut açısı
                 if (this.gltfScene) {
-                    this.targetRotY = mouseX * 0.35;
+                    this.targetRotY = this.baseRotY + mouseX * 0.35;
                 }
             }
         });
@@ -321,7 +327,7 @@ export class Fox3DController {
         }
 
         // 3. GLB yumuşak bakış takibi
-        if (this.gltfScene && !this.isDragging) {
+        if (this.gltfScene && !this.isDragging && this.spinVelocity <= 0.005) {
             this.gltfScene.rotation.y += (this.targetRotY - this.gltfScene.rotation.y) * 0.06;
         }
 
@@ -329,6 +335,8 @@ export class Fox3DController {
         const activeTarget = this.gltfScene || this.foxGroup;
         if (this.spinVelocity > 0.005) {
             activeTarget.rotation.y += this.spinVelocity;
+            this.baseRotY = activeTarget.rotation.y;
+            this.targetRotY = activeTarget.rotation.y;
             this.spinVelocity *= 0.94;
         }
 
