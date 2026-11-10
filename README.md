@@ -60,7 +60,7 @@ mihsanekinci.github.io/
 │   └── decisions/
 │       ├── ADR-001-modular-portfolio-architecture.md      # Modüler ES6 & SOLID Mimari Karar Kaydı
 │       └── ADR-002-anti-ai-slop-editorial-swiss-grid.md   # Editorial Swiss Grid & 6 Japon Felsefesi Karar Kaydı
-└── labs/                       # Arşivlenen Web Programlama Dersi laboratuvar çalışmaları
+└── assets/                         # 3D glTF modelleri, favicon ve marka ikonları
 ```
 
 ### 📑 Mimari Karar Kayıtları (Architecture Decision Records)
@@ -69,12 +69,14 @@ mihsanekinci.github.io/
 
 ---
 
-## 🧪 Web Programlama Dersi Laboratuvar Arşivi (`/labs/`)
+## 🧪 Web Programlama Dersi Laboratuvar Arşivi (`archive/web-prog-labs`)
 
-Bu deponun önceki dönemlerde ev sahipliği yaptığı **Web Programlama Dersi** laboratuvar çalışmaları ve ödevleri, ana portfolyo mimarisinden izole edilerek [`/labs/`](./labs/) dizini altında arşivlenmiştir:
+Bu deponun önceki dönemlerde ev sahipliği yaptığı **Web Programlama Dersi** laboratuvar çalışmaları ve ödevleri, ana portfolyonun yalın kalması amacıyla [`archive/web-prog-labs`](https://github.com/mihsanekinci/mihsanekinci.github.io/releases/tag/archive/web-prog-labs) Git etiketiyle kalıcı olarak arşivlenmiş ve ana çalışma ağacından temizlenmiştir.
 
-- 📂 [**Tüm Laboratuvar Çalışmaları Dizinine Git (`./labs/`)**](./labs/)
-- 🌐 [**Canlı Ders Arşivi (`/labs/`)**](https://mihsanekinci.github.io/labs/)
+İhtiyaç halinde geri yüklemek için:
+```bash
+git checkout archive/web-prog-labs -- labs/
+```
 
 ---
 
