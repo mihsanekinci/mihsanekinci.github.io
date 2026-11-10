@@ -161,7 +161,6 @@ export const siteData = {
             footer: {
                 rights: "Tüm hakları saklıdır.",
                 builtWith: "Semantik HTML5, 1px Swiss Grid CSS ve Vanilla ES6+ ile sıfır bağımlılıkla inşa edildi.",
-                labsArchive: "Web Programlama Dersi Lab Arşivi (/labs) →",
                 backToTop: "Yukarı Çık ↑"
             }
         },
@@ -279,7 +278,6 @@ export const siteData = {
             footer: {
                 rights: "All rights reserved.",
                 builtWith: "Engineered with zero dependencies using semantic HTML5, 1px Swiss Grid CSS, and Vanilla ES6+.",
-                labsArchive: "Web Programming Course Lab Archive (/labs) →",
                 backToTop: "Back to Top ↑"
             }
         }
