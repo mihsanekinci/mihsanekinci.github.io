@@ -2,6 +2,7 @@
  * Mehmet İhsan Ekinci — Editorial Portfolio Data & Localization (TR / EN)
  * Single Responsibility: Sitedeki tüm çeviri sözlüklerini, projeleri, deneyim zaman çizelgesini,
  * teknik yetkinlik matrisini ve Altı Japon İlkesi (Ethos) monografisini barındırır.
+ * Kaynak: Obsidian Brain v2.0 (Üst-Beyin), Harvard CV 2026 & Evrensel Mühendislik Heybesi.
  */
 
 export const siteData = {
@@ -27,6 +28,8 @@ export const siteData = {
             "我慢 (Gaman): Karmaşık hata ayıklamada sabır ve metanet.",
             "仕方がない (Shikata ga nai): Değiştiremeyeceğine takılma, çözüme odaklan.",
             "反省 (Hansei): Hatalarından dürüstçe öğren; Kaizen'in anahtarı!",
+            "Trade-off: Her mimarinin bir bedeli vardır; mühendislik o bedeli yönetme sanatıdır.",
+            "Denetçi Kas: 100 kişi kod yazacağına, sistemi bilen 10 mimar AI'ı yönetir.",
             "Git Status: Branch main — 0 error, 0 warning ✓",
             "Kitsune 狐: Çevik zekâ, keskin odak!"
         ],
@@ -37,6 +40,8 @@ export const siteData = {
             "我慢 (Gaman): Patient perseverance through tough bugs.",
             "仕方がない (Shikata ga nai): Focus solely on what you can control.",
             "反省 (Hansei): Honest reflection is the catalyst for growth!",
+            "Trade-off: Every architecture has a cost; engineering is managing it effectively.",
+            "Systems Auditor: Rather than 100 writing syntax, 10 architects direct and audit AI.",
             "Git Status: Branch main — 0 errors, 0 warnings ✓",
             "Kitsune 狐: Agile intellect and sharp focus!"
         ]
@@ -59,10 +64,10 @@ export const siteData = {
             hero: {
                 sectionTag: "01 / PROFİL",
                 locationLabel: "İstanbul, Türkiye",
-                badge: "AĞ GÜVENLİĞİ, LINUX SİSTEMLERİ & YAZILIM MİMARİSİ",
+                badge: "AĞ GÜVENLİĞİ, GÖMÜLÜ SİSTEMLER & AI MİMARİSİ",
                 greeting: "Mehmet İhsan Ekinci",
-                subtitle: "Marmara Üniversitesi Bilgisayar Mühendisliği öğrencisi. Ağ ve siber güvenlik protokolleri, düşük seviyeli Linux sistem programlama (C, POSIX, epoll) ve katı SOLID prensiplerine dayalı yazılım mimarileri üzerine çalışıyorum.",
-                ctaProjects: "→ Seçilmiş Projeler (08)",
+                subtitle: "Marmara Üniversitesi Bilgisayar Mühendisliği 4. sınıf öğrencisiyim. mayaICT bünyesinde kurumsal ağ güvenliği mühendisliği (L2/L3, OSPF, ACL, Wireshark), gömülü sistemler ve simülasyon (C/POSIX, PINN trafik optimizasyonu tezi) ile AST & CoALA tabanlı deterministik AI ajan mimarileri üzerine çalışıyorum.",
+                ctaProjects: "→ Seçilmiş Projeler (11)",
                 ctaContact: "İletişim",
                 copyEmail: "E-postayı Kopyala",
                 copied: "Kopyalandı",
@@ -75,15 +80,15 @@ export const siteData = {
                 }
             },
             about: {
-                sectionTag: "01 // MİMARİ YAKLAŞIM",
-                title: "Sistem Düşüncesi & Mühendislik Disiplini",
-                subtitle: "Çekirdek seviyesi soket yönetiminden uygulama katmanındaki modüler sınırlarına kadar, yazılımı ölçülebilir, denetlenebilir ve uzun ömürlü bir yapı olarak kurguluyorum.",
-                bentoMainTitle: "Düşük Gecikme, Açık Sınırlar, Sıfır Sürpriz",
-                bentoMainDesc: "Bir sistemin yalnızca beklenen çıktıyı üretmesi yeterli değildir; yük altında öngörülebilir davranması, güvenlik sınırlarının açıkça tanımlanması ve kod tabanının yıllar sonra bile okunabilir kalması gerekir.",
+                sectionTag: "01 // SİSTEM YAKLAŞIMI",
+                title: "Sistem Fiziği, Mekanizma & Denetçilik",
+                subtitle: "Kod hamallığını yapay zekaya bırakıp; donanım kısıtlarını, ağ protokollerini ve sistem sınırlarını uçtan uca teşhis edebilen denetçi mühendislik disiplini.",
+                bentoMainTitle: "Sensörden Ağa, Ağdan Modele: Tek Sistem Omurgası",
+                bentoMainDesc: "Fiziksel sahadan (gömülü sensörler / C) çıkan verinin kurumsal ağlardan (VLAN, OSPF, QoS) geçerek zeka modellerine (PINN, ST-GNN, LLM) ulaştığı tek bir boru hattını modelliyor; kriz anında Wireshark paket analizi, AST denetimi ve deterministik metriklerle sistemin röntgenini çekiyorum.",
                 bentoHighlights: [
-                    "Ağ & Siber Güvenlik (TCP/IP, OWASP Top 10, Trafik & Protokol Analizi)",
-                    "Sistem & Gömülü Linux Programlama (C, epoll, Non-Blocking POSIX I/O)",
-                    "Modüler Yazılım Mimarisi (TypeScript, Python, ASP.NET Core, Katı SOLID)"
+                    "Kurumsal Ağ Güvenliği (Huawei VRP, Cisco IOS, L2/L3, OSPF, ACL, Wireshark, Zero-Trust)",
+                    "Gömülü Sistemler & Simülasyon (C, POSIX epoll, PINN/SUMO Akıllı Ulaşım Tezi)",
+                    "Modüler Yazılım & AI Mimarisi (Clean/Hexagonal, Katı SOLID, CoALA Ajan Harness, FastAPI)"
                 ],
                 kaizenTitle: "Kaizen (改善)",
                 kaizenSub: "Sürekli İyileşme",
@@ -98,14 +103,14 @@ export const siteData = {
             experience: {
                 sectionTag: "02 // DENEYİM & EĞİTİM",
                 title: "Sektörel Deneyim & Akademik Altyapı",
-                subtitle: "Kurumsal ağ güvenliği mühendisliği pratiğim ve bilgisayar mühendisliği lisans eğitimim."
+                subtitle: "Kurumsal ağ mühendisliği pratiğim, yazılım stajlarım, akademik lisans tezi ve sivil toplum liderliğim."
             },
             projects: {
                 sectionTag: "03 // SEÇİLMİŞ ÇALIŞMALAR",
                 title: "Mühendislik Projeleri İndeksi",
-                subtitle: "Ağ güvenliği, Linux sistem programlama, gömülü sistemler ve modüler yazılım mimarileri üzerine geliştirdiğim açık kaynak projeler.",
+                subtitle: "Ağ güvenliği, Linux çekirdeği (epoll), akıllı ulaşım simülasyonu (PINN), ilişkisel graf analitiği ve modüler temiz mimariyle geliştirilmiş açık kaynak projeler.",
                 filters: {
-                    all: "Tümü [08]",
+                    all: "Tümü",
                     network: "Ağ & Güvenlik",
                     systems: "Sistem & C",
                     web: "Web & Mimari",
@@ -118,7 +123,7 @@ export const siteData = {
             skills: {
                 sectionTag: "04 // TEKNİK YIĞIN",
                 title: "Yetkinlik Matrisi",
-                subtitle: "Aktif üretimde kullandığım diller, ağ/sistem araçları ve mimari standartlar."
+                subtitle: "Kurumsal üretimde, ağ laboratuvarlarında ve akademik araştırmalarda bizzat kullandığım araç ve standartlar."
             },
             ethos: {
                 sectionTag: "05 / ETHOS",
@@ -144,7 +149,7 @@ export const siteData = {
                 formSubject: "Konu",
                 formSubjectOptions: {
                     project: "Mühendislik Projesi / İş Birliği",
-                    job: "Staj / Mühendislik Rolü",
+                    job: "Mühendislik Rolü / Fırsat",
                     opensource: "Açık Kaynak Katkısı",
                     other: "Diğer / Teknik İletişim"
                 },
@@ -177,10 +182,10 @@ export const siteData = {
             hero: {
                 sectionTag: "01 / PROFILE",
                 locationLabel: "Istanbul, Turkey",
-                badge: "NETWORK SECURITY, LINUX SYSTEMS & SOFTWARE ARCHITECTURE",
+                badge: "NETWORK SECURITY, EMBEDDED SYSTEMS & AI ARCHITECTURE",
                 greeting: "Mehmet İhsan Ekinci",
-                subtitle: "Computer Engineering student at Marmara University. Focused on network security protocols, low-level Linux systems programming (C, POSIX, epoll), and modular software architectures built on strict SOLID principles.",
-                ctaProjects: "→ Selected Projects (08)",
+                subtitle: "Senior Computer Engineering student at Marmara University. Practicing enterprise network security engineering at mayaICT (L2/L3, OSPF, ACL, Wireshark), embedded systems and simulation (C/POSIX, PINN traffic optimization thesis), and deterministic AST/CoALA-based AI agent harnesses.",
+                ctaProjects: "→ Selected Projects (11)",
                 ctaContact: "Contact",
                 copyEmail: "Copy Email",
                 copied: "Copied",
@@ -193,15 +198,15 @@ export const siteData = {
                 }
             },
             about: {
-                sectionTag: "01 // ARCHITECTURAL APPROACH",
-                title: "Systems Thinking & Engineering Discipline",
-                subtitle: "From kernel-level socket multiplexing to modular application boundaries, I engineer software to be measurable, auditable, and built to last.",
-                bentoMainTitle: "Low Latency, Explicit Boundaries, Zero Surprises",
-                bentoMainDesc: "Producing the expected output is only the baseline. A well-engineered system must behave predictably under load, enforce strict security boundaries, and remain intelligible for years.",
+                sectionTag: "01 // SYSTEMS APPROACH",
+                title: "Systems Physics, Mechanics & Auditing",
+                subtitle: "Offloading syntax boilerplate to AI while mastering the hardware constraints, network protocols, and system boundaries required to audit, verify, and architect mission-critical infrastructure.",
+                bentoMainTitle: "From Sensor to Network, from Network to Model",
+                bentoMainDesc: "I treat engineering as a unified pipeline where field data leaves embedded sensors (C/POSIX), traverses enterprise networks (VLAN, OSPF, QoS), and feeds machine intelligence (PINN, ST-GNN, LLM). When anomalies arise, I diagnose root causes through Wireshark packet inspections, AST code audits, and deterministic telemetry.",
                 bentoHighlights: [
-                    "Network & Cyber Security (TCP/IP, OWASP Top 10, Traffic & Protocol Analysis)",
-                    "Systems & Embedded Linux Programming (C, epoll, Non-Blocking POSIX I/O)",
-                    "Modular Software Architecture (TypeScript, Python, ASP.NET Core, Strict SOLID)"
+                    "Enterprise Network Security (Huawei VRP, Cisco IOS, L2/L3, OSPF, ACL, Wireshark, Zero-Trust)",
+                    "Embedded Systems & Simulation (C, POSIX epoll, PINN/SUMO Intelligent Transportation Thesis)",
+                    "Modular Software & AI Architecture (Clean/Hexagonal, Strict SOLID, CoALA Agent Harness, FastAPI)"
                 ],
                 kaizenTitle: "Kaizen (改善)",
                 kaizenSub: "Continuous Improvement",
@@ -216,14 +221,14 @@ export const siteData = {
             experience: {
                 sectionTag: "02 // EXPERIENCE & EDUCATION",
                 title: "Industry Experience & Academic Foundation",
-                subtitle: "Enterprise network security engineering practice and undergraduate computer engineering studies."
+                subtitle: "Enterprise network engineering practice, software internships, undergraduate thesis research, and community leadership."
             },
             projects: {
                 sectionTag: "03 // SELECTED WORKS",
                 title: "Engineering Projects Index",
-                subtitle: "Open-source systems spanning network security, Linux systems programming, embedded telemetry, and modular software architecture.",
+                subtitle: "Open-source systems spanning enterprise network security, Linux kernel (epoll), intelligent transportation simulation (PINN), relational graph analytics, and modular clean architecture.",
                 filters: {
-                    all: "All [08]",
+                    all: "All",
                     network: "Network & Security",
                     systems: "Systems & C",
                     web: "Web & Architecture",
@@ -236,7 +241,7 @@ export const siteData = {
             skills: {
                 sectionTag: "04 // TECHNICAL STACK",
                 title: "Competency Matrix",
-                subtitle: "Languages, network/systems tooling, and architectural standards used in production."
+                subtitle: "Tools, protocols, and architectural standards actively applied in production, network labs, and research."
             },
             ethos: {
                 sectionTag: "05 / ETHOS",
@@ -262,7 +267,7 @@ export const siteData = {
                 formSubject: "Subject",
                 formSubjectOptions: {
                     project: "Engineering Project / Collaboration",
-                    job: "Internship / Engineering Role",
+                    job: "Engineering Role / Opportunity",
                     opensource: "Open Source Contribution",
                     other: "Other / Technical Inquiry"
                 },
@@ -323,8 +328,8 @@ export const siteData = {
                 en: "Ikigai represents one's reason for being—the convergence of mastery, curiosity, real-world utility, and craft. In software engineering, it means moving beyond abstract theory to ship reliable, high-utility tools that people and infrastructure can depend on."
             },
             engineeringReflection: {
-                tr: "Yalnızca ödev veya vitrin için değil; ağ güvenliği tarayıcılarından milisaniye hassasiyetli medya araçlarına kadar gerçek bir ihtiyacı çözen açık kaynak yazılımlar üretmek.",
-                en: "Building open-source software that solves concrete problems—from automated security reconnaissance to precision media tooling—rather than hollow showcase demos."
+                tr: "Yalnızca ödev veya vitrin için değil; ağ güvenliği tarayıcılarından graf analitiği ve milisaniye hassasiyetli medya araçlarına kadar gerçek bir ihtiyacı çözen açık kaynak yazılımlar üretmek.",
+                en: "Building open-source software that solves concrete problems—from automated security reconnaissance to precision media and graph tooling—rather than hollow showcase demos."
             }
         },
         {
@@ -369,7 +374,7 @@ export const siteData = {
                 en: "Gaman means enduring the seemingly unbearable with patience, dignity, and quiet resolve. In systems programming and network security, a single race condition or malformed packet can take hours to isolate. Gaman is the discipline to resist guesswork and methodically trace the root cause."
             },
             engineeringReflection: {
-                tr: "Rastgele kod değiştirmek yerine logları, paket dökümlerini (pcap) ve sistem çağrılarını (strace/gdb) adım adım izleyerek deterministik kök neden analizi yapmak.",
+                tr: "Rastgele kod değiştirmek yerine logları, paket dökümlerini (Wireshark pcap) ve sistem çağrılarını (strace/gdb) adım adım izleyerek deterministik kök neden analizi yapmak.",
                 en: "Replacing trial-and-error guesswork with deterministic root-cause analysis through packet captures, system call tracing, and reproducible test cases."
             }
         },
@@ -415,7 +420,7 @@ export const siteData = {
                 en: "Hansei is the practice of honest, ego-free reflection after completing a milestone—regardless of how successful the outcome appears. Without Hansei, Kaizen is impossible: you can only refine the architectural flaws and blind spots you are willing to acknowledge."
             },
             engineeringReflection: {
-                tr: "Her proje ve staj dönemi sonunda yapılan blameless post-mortem değerlendirmeleri, eski kod tabanlarını modüler SOLID yapısına dönüştürme cesareti.",
+                tr: "Her proje ve staj dönemi sonunda yapılan blameless post-mortem değerlendirmeleri, eski kod tabanlarını modüler SOLID ve Clean Architecture yapısına dönüştürme cesareti.",
                 en: "Conducting blameless post-mortems, auditing past architectural trade-offs, and refactoring legacy codebases into clean, modular SOLID structures."
             }
         }
@@ -429,158 +434,281 @@ export const siteData = {
                 en: "2026 — PRESENT"
             },
             role: {
-                tr: "Ağ ve Ağ Güvenliği Mühendisliği (İş Yeri Eğitimi / Staj)",
-                en: "Network & Network Security Engineering (Workplace Training / Intern)"
+                tr: "Ağ ve Ağ Güvenliği Mühendisi (İş Yeri Eğitimi / İYE)",
+                en: "Network & Network Security Engineer (Workplace Training / Intern)"
             },
-            organization: "mayaICT",
+            organization: "mayaICT Bilgisayar Hizmetleri A.Ş.",
             location: {
                 tr: "İstanbul, Türkiye",
                 en: "Istanbul, Turkey"
             },
             description: {
-                tr: "Kurumsal ağ topolojileri, güvenlik duvarı (firewall) politikaları, paket/trafik analizi ve siber güvenlik protokolleri üzerine uygulamalı mühendislik çalışmaları. Ağ altyapı süreçlerinin teknik dokümantasyonu ve güvenli topoloji tasarımı.",
-                en: "Applied engineering focused on enterprise network topologies, firewall rule policies, packet/traffic inspection, and cybersecurity protocols. Structured technical documentation and resilient network architecture design."
+                tr: "Huawei VRP (eNSP) ve Cisco IOS üzerinde kurumsal L2/L3 topolojileri (802.1Q VLAN izolasyonu, Access/Trunk/Hybrid portlar, STP/RSTP döngü engelleme, LACP Eth-Trunk). VLSM IP planlama, OSPF dinamik yönlendirme, Router-on-a-Stick Inter-VLAN Routing, Temel/Gelişmiş ACL filtreleme, AAA kimlik doğrulama ve Wireshark ile derin paket analizi.",
+                en: "Engineering enterprise L2/L3 network topologies on Huawei VRP (eNSP) and Cisco IOS: 802.1Q VLAN isolation, Access/Trunk/Hybrid ports, STP/RSTP loop prevention, and LACP Eth-Trunk aggregation. Configuring VLSM subnetting, dynamic OSPF routing, Router-on-a-Stick Inter-VLAN routing, ACL filtering, AAA security, and deep Wireshark packet inspection."
             },
-            tags: ["Network Security", "TCP/IP", "Routing & Switching", "Firewall Policies", "Linux"]
+            tags: ["Huawei VRP / eNSP", "Cisco IOS", "802.1Q VLAN", "STP / RSTP", "OSPF", "ACL & AAA", "Wireshark"]
+        },
+        {
+            type: "experience",
+            period: {
+                tr: "TEMMUZ 2026 — AĞUSTOS 2026",
+                en: "JULY 2026 — AUGUST 2026"
+            },
+            role: {
+                tr: "Ağ ve Yazılım Mühendisliği Stajyeri (Yaz Stajı)",
+                en: "Network & Software Engineering Intern (Summer Internship)"
+            },
+            organization: "mayaICT Bilişim Teknolojileri A.Ş.",
+            location: {
+                tr: "İstanbul, Türkiye",
+                en: "Istanbul, Turkey"
+            },
+            description: {
+                tr: "Cisco, Fortinet, HPE/Aruba ve Palo Alto çözümleriyle kurumsal ağ ve siber güvenlik (Zero Trust, DLP, SD-WAN) saha/proje süreçlerinde teknik görevler. Kurumsal web sitesi için kaynak izlenebilirliği garantili, FastAPI ve ChromaDB vektör tabanlı yerel RAG destek chatbotu geliştirimi.",
+                en: "Participated in enterprise networking and cybersecurity (Zero Trust, DLP, SD-WAN) project workflows leveraging Cisco, Fortinet, HPE/Aruba, and Palo Alto solutions. Built an on-premise RAG customer-support chatbot with source traceability using FastAPI and ChromaDB."
+            },
+            tags: ["Zero Trust", "Fortinet", "Palo Alto", "FastAPI", "ChromaDB", "RAG"]
+        },
+        {
+            type: "experience",
+            period: {
+                tr: "TEMMUZ 2025 — EYLÜL 2025",
+                en: "JULY 2025 — SEPTEMBER 2025"
+            },
+            role: {
+                tr: "Yazılım Geliştirme Stajyeri (Frontend)",
+                en: "Software Engineering Intern (Frontend)"
+            },
+            organization: "Kodiks Bilişim A.Ş.",
+            location: {
+                tr: "İstanbul, Türkiye",
+                en: "Istanbul, Turkey"
+            },
+            description: {
+                tr: "Mobil tabanlı bilgi yarışması platformunun yönetim panelini (admin dashboard) Angular 20 kullanarak modüler, tip-güvenli, duyarlı ve sürdürülebilir bir mimaride geliştirdi.",
+                en: "Architected and delivered an enterprise administration dashboard for a mobile quiz and competition platform using Angular 20 with modular, responsive, and type-safe components."
+            },
+            tags: ["Angular 20", "TypeScript", "Admin Dashboard", "Component Architecture", "REST API"]
+        },
+        {
+            type: "leadership",
+            period: {
+                tr: "2024 — GÜNÜMÜZ",
+                en: "2024 — PRESENT"
+            },
+            role: {
+                tr: "Yönetim Kurulu Üyesi & Sayman / Bilim Atölyesi Koordinatörü",
+                en: "Board Member & Treasurer / Science Workshop Coordinator"
+            },
+            organization: "Çağdaş Yaşamı Destekleme Derneği (ÇYDD) — Ataşehir",
+            location: {
+                tr: "İstanbul, Türkiye",
+                en: "Istanbul, Turkey"
+            },
+            description: {
+                tr: "Şubenin yıllık bütçe planlaması, finansal kayıtları ve gelir-gider denetim süreçlerini yönetmektedir. 'Mahallede Cümbüş Var' ve 'Köyde Şenlik Var' sosyal sorumluluk projelerinde çocuklara yönelik bilim atölyelerinin müfredatını, saha operasyonunu ve gönüllü ekiplerini koordine etti.",
+                en: "Managing annual budget allocations, financial auditing, and fiscal records for the Ataşehir branch. Directed science workshop curricula, volunteer field operations, and STEM outreach in social responsibility initiatives."
+            },
+            tags: ["Leadership", "Financial Auditing", "STEM Education", "Project Coordination"]
         },
         {
             type: "education",
             period: {
-                tr: "DEVAM EDİYOR",
-                en: "ONGOING"
+                tr: "2023 — 2027 (BEKLENEN)",
+                en: "2023 — 2027 (EXPECTED)"
             },
             role: {
-                tr: "Bilgisayar Mühendisliği (Lisans)",
-                en: "B.Sc. in Computer Engineering"
+                tr: "Bilgisayar Mühendisliği Lisans Programı (4. Sınıf)",
+                en: "B.Sc. in Computer Engineering (Senior Year)"
             },
-            organization: {
-                tr: "Marmara Üniversitesi — Teknoloji Fakültesi",
-                en: "Marmara University — Faculty of Technology"
-            },
+            organization: "Marmara Üniversitesi — Teknoloji Fakültesi",
             location: {
                 tr: "İstanbul, Türkiye",
                 en: "Istanbul, Turkey"
             },
             description: {
-                tr: "Sistem programlama, bilgisayar ağları, işletim sistemleri, yazılım mimarileri, bulut mimarilerinde test mühendisliği ve algoritma analizi üzerine mühendislik eğitimi.",
-                en: "Undergraduate computer engineering curriculum focused on systems programming, computer networks, operating systems, software architecture, cloud test engineering, and algorithms."
+                tr: "Bitirme Tezi: Akıllı Ulaşım Sistemlerinde Fizik Bilgili Derin Öğrenme (PINN / ST-GNN / KAN) ve İki Seviyeli Altyapı Optimizasyonu (Danışman: Dr. Öğr. Üyesi Ali Sarıkaş). Bilgisayar Ağları, Bilgisayar Güvenliği, Sistem Programlama, İşletim Sistemleri, Bulut Test Mühendisliği ve Mikrodenetleyiciler müfredatı.",
+                en: "Senior Thesis: Physics-Informed Deep Learning (PINN / ST-GNN / KAN) and Bilevel Infrastructure Optimization in Intelligent Transportation Systems (Advisor: Asst. Prof. Ali Sarıkaş). Curriculum: Computer Networks, Security, Systems Programming, Operating Systems, Cloud Testing, Microcontrollers."
             },
-            tags: ["Systems Programming", "Computer Networks", "Software Architecture", "Cloud Testing", "Algorithms"]
+            tags: ["Systems Programming", "Computer Networks", "CyberSecurity", "PINN", "Cloud Testing"]
+        },
+        {
+            type: "education",
+            period: {
+                tr: "2019 — 2023",
+                en: "2019 — 2023"
+            },
+            role: {
+                tr: "Lise Eğitimi (Fen Lisesi Diploması)",
+                en: "High School Diploma (Science High School)"
+            },
+            organization: "Yahya Akel Fen Lisesi",
+            location: {
+                tr: "Mersin, Türkiye",
+                en: "Mersin, Turkey"
+            },
+            description: {
+                tr: "İleri düzey matematik, analitik düşünme ve fen bilimleri temeli.",
+                en: "Advanced curriculum in mathematics, physics, and analytical problem-solving foundation."
+            },
+            tags: ["Mathematics", "Physics", "Analytical Foundation"]
         }
     ],
 
     projects: [
         {
-            id: "kesital",
-            repo: "kesital",
-            title: "KesitAl — Video Scrubber & Clipper",
-            category: "web",
+            id: "network",
+            repo: "network",
+            title: "NetWork — İlişkisel Graf Analitiği ve Görselleştirme",
+            category: "network",
             featured: true,
-            badge: "SOLID / TypeScript",
+            badge: "Graph Analytics / TS",
             description: {
-                tr: "QuickTime tarzı görsel zaman çubuğuna (Scrubber) sahip, YouTube ve web videolarından milisaniye hassasiyetinde kesit indirme aracı. Katı SOLID prensipleri, modüler TypeScript mimarisi, yt-dlp ve FFmpeg boru hattı ile geliştirildi.",
-                en: "QuickTime-style visual timeline scrubber and millisecond-precision video clipper for YouTube and web streams. Engineered with strict SOLID architecture, modular TypeScript, yt-dlp, and FFmpeg."
+                tr: "Kişi, kurum ve kavramlar arası ilişkileri modelleyen full-stack graf analitiği platformu. BFS tabanlı Pathfinder motoruyla en kısa referans zinciri analizi, Dagre hiyerarşik otomatik dizilimi, Zod çalışma zamanı şema doğrulaması ve 143 otomatik API entegrasyon testi.",
+                en: "Full-stack relational graph analytics platform modeling connections between people, organizations, and concepts. Features BFS Pathfinder for shortest reference chains, Dagre hierarchical auto-layout, Zod runtime validation, and 143 automated API integration tests."
             },
-            tech: ["TypeScript", "SOLID", "FFmpeg", "yt-dlp", "Node.js"],
-            url: "https://github.com/mihsanekinci/kesital"
-        },
-        {
-            id: "event-io-project",
-            repo: "event-io-project",
-            title: "Event-IO — epoll Async Server",
-            category: "systems",
-            featured: true,
-            badge: "Linux Systems / C",
-            description: {
-                tr: "Linux çekirdeğinin epoll I/O çoklama (multiplexing) mekanizmasını ve bloklamayan (non-blocking) POSIX soketlerini kullanan, tek iş parçacığı üzerinde çoklu istemci yönetebilen yüksek performanslı C sunucusu.",
-                en: "High-concurrency asynchronous multi-client chat and event server written in C using Linux epoll I/O multiplexing and non-blocking POSIX sockets."
-            },
-            tech: ["C", "Linux epoll", "POSIX Sockets", "Async I/O", "Systems"],
-            url: "https://github.com/mihsanekinci/event-io-project"
+            tech: ["React", "TypeScript", "Node.js", "Prisma ORM", "Zod", "Dagre"],
+            url: "https://github.com/mihsanekinci/network"
         },
         {
             id: "owasp-top10-scanner",
             repo: "owasp-top10-scanner",
-            title: "OWASP Top 10 Security Scanner",
+            title: "AI Destekli Modüler Web Zafiyet Tarayıcısı",
             category: "network",
             featured: true,
-            badge: "CyberSecurity / Python",
+            badge: "AppSec & RAG / Python",
             description: {
-                tr: "Web uygulamalarını OWASP Top 10 güvenlik kriterlerine göre inceleyen, HTTP başlıklarını ve olası zafiyet vektörlerini otomatik olarak tarayıp raporlayan Python tabanlı güvenlik analiz aracı.",
-                en: "Automated security reconnaissance and vulnerability scanner built in Python to audit web applications against OWASP Top 10 security vectors."
+                tr: "OWASP Top 10 zafiyetlerini (SQLi, XSS, SSRF vb.) asenkron olarak tarayan modüler güvenlik motoru. DVWA, Juice-Shop ve WebGoat içeren izole Docker laboratuvarı; ChromaDB ve çoklu yerel LLM konsensüsüyle her bulgu için otomatik Türkçe kök neden analizi ve yama kodu üretimi.",
+                en: "Modular vulnerability scanning engine auditing web apps against OWASP Top 10 vectors. Runs in an isolated Docker Compose testbed (DVWA, Juice-Shop, WebGoat) with a ChromaDB RAG pipeline and multi-LLM consensus producing automated root-cause analysis and remediation patches."
             },
-            tech: ["Python", "OWASP Top 10", "AppSec", "HTTP Analysis"],
+            tech: ["Python", "FastAPI", "Docker Compose", "ChromaDB", "Ollama", "OWASP"],
             url: "https://github.com/mihsanekinci/owasp-top10-scanner"
         },
         {
-            id: "network",
-            repo: "network",
-            title: "Network Architecture & Toolkit",
-            category: "network",
+            id: "event-io-project",
+            repo: "event-io-project",
+            title: "Event-IO — Linux epoll Yüksek Başarımlı Asenkron Sunucu",
+            category: "systems",
             featured: true,
-            badge: "Networking / TS",
+            badge: "Linux Kernel / C",
             description: {
-                tr: "Ağ topolojilerini, alt ağ (subnet) hesaplamalarını ve protokol akışlarını modellemek ve denetlemek için geliştirilen TypeScript tabanlı ağ mühendisliği aracı.",
-                en: "TypeScript-based network engineering toolkit designed to model, inspect, and verify network topologies and protocol workflows."
+                tr: "Linux çekirdeğinin epoll I/O çoklama (multiplexing) mekanizmasını ve bloklamayan (non-blocking) POSIX soketlerini kullanan, tek iş parçacığı üzerinde binlerce eşzamanlı istemciyi düşük gecikmeyle yönetebilen yüksek performanslı C sunucusu.",
+                en: "High-concurrency asynchronous server written in C leveraging Linux epoll I/O multiplexing and non-blocking POSIX sockets to handle multi-client connections on a single event-driven thread with minimal latency."
             },
-            tech: ["TypeScript", "Computer Networks", "TCP/IP", "Topology"],
-            url: "https://github.com/mihsanekinci/network"
+            tech: ["C", "Linux epoll", "POSIX Sockets", "Non-Blocking I/O", "Systems"],
+            url: "https://github.com/mihsanekinci/event-io-project"
         },
         {
             id: "ai-driven-embedded-linux",
             repo: "ai-driven-embedded-linux",
-            title: "AI-Driven Embedded Linux",
+            title: "AI-Driven Embedded Linux Telemetry & Systems",
             category: "systems",
             featured: false,
             badge: "Embedded Linux / C",
             description: {
-                tr: "Gömülü Linux ortamlarında düşük seviyeli C sistem çağrıları ile yerel yapay zekâ telemetri ve karar süreçlerini birleştiren sistem mühendisliği çalışması.",
-                en: "Systems engineering project combining low-level C system calls on Embedded Linux with edge AI telemetry and decision workflows."
+                tr: "Gömülü Linux ortamlarında düşük seviyeli C sistem çağrıları, bellek kısıtları ve donanım tamponu yönetimiyle yerel yapay zeka telemetri ve karar süreçlerini birleştiren sistem mühendisliği çalışması.",
+                en: "Systems engineering implementation combining low-level C system calls, memory constraints, and ring-buffer management on Embedded Linux with edge AI telemetry and inference workflows."
             },
-            tech: ["C", "Embedded Linux", "Edge AI", "System Calls"],
+            tech: ["C", "Embedded Linux", "Edge AI", "System Calls", "POSIX"],
             url: "https://github.com/mihsanekinci/ai-driven-embedded-linux"
+        },
+        {
+            id: "obsidian-brain-harness",
+            repo: "obsidian-brain",
+            title: "Deterministik AI Agent Harness & Bilişsel Bellek Motoru",
+            category: "systems",
+            featured: true,
+            badge: "CoALA & AST / Python",
+            description: {
+                tr: "Yapay zeka kodlama ajanları için CoALA 4-katmanlı bellek mimarisi, Türkçe sondan eklemeli morfolojiye duyarlı Okapi BM25 arama motoru ve kayıpsız bağlam sıkıştırma motoru. Python ast modülüyle SOLID sınırlarını ve kimlik sızıntılarını (Secret Guard) denetleyen statik sensörler.",
+                en: "Deterministic cognitive memory engine for coding agents featuring CoALA 4-tier memory, Turkish-morphology-aware Okapi BM25 search, and lossless context compaction. Built with zero dependencies using Python ast for static SOLID audits and Secret Guard leakage prevention."
+            },
+            tech: ["Python", "AST", "Okapi BM25", "CoALA Architecture", "Sensors"],
+            url: "https://github.com/mihsanekinci"
+        },
+        {
+            id: "bitirme-projesi",
+            repo: "bitirme_projesi",
+            title: "Akıllı Ulaşım Sistemlerinde PINN & ST-GNN Trafik Optimizasyonu",
+            category: "ai",
+            featured: true,
+            badge: "PINN & SUMO / PyTorch",
+            description: {
+                tr: "Kentsel karayolu ağlarında diferansiyel trafik akışı korunum yasalarını (LWR ve ARZ modelleri) kayıp fonksiyonuna entegre eden Fizik Bilgili Sinir Ağları (PINN), ST-GNN ve KAN modellemesi. SUMO mikrosimülasyonu üzerinde Braess Paradoksu ve kullanıcı dengesini optimize eden iki seviyeli altyapı tezi.",
+                en: "Academic thesis integrating conservation laws of traffic flow (LWR/ARZ partial differential equations) into deep learning loss functions via Physics-Informed Neural Networks (PINN), ST-GNN, and KAN. Evaluated in SUMO microsimulations for bilevel network optimization against Braess's paradox."
+            },
+            tech: ["Python", "PyTorch", "PINN (LWR/ARZ)", "ST-GNN", "KAN", "SUMO"],
+            url: "https://github.com/mihsanekinci/bitirme_projesi"
         },
         {
             id: "real-time-ai-stock-portfolio-monitoring",
             repo: "real-time-ai-stock-portfolio-monitoring",
-            title: "Real-Time AI Portfolio Monitor",
+            title: "Stock Portfolio Tracker — Bulut-Yerel FinTech Backend",
             category: "ai",
-            featured: false,
-            badge: "Data Pipeline / Python",
+            featured: true,
+            badge: "Cloud-Native & k6 / FastAPI",
             description: {
-                tr: "Canlı finansal veri akışlarını işleyen ve makine öğrenmesi modelleriyle portföy risk/anomali analizi sunan gerçek zamanlı izleme motoru.",
-                en: "Real-time financial data stream processor and AI-assisted portfolio risk analytics engine written in Python."
+                tr: "Minikube üzerinde Kubernetes orkestrasyonu, multi-stage Dockerfile ve GitHub Actions CI/CD boru hattıyla çalışan bulut-yerel portföy yönetim servisi. pytest (%70+ kapsama), Testcontainers, k6 yük testleriyle p95 gecikme optimizasyonu, Prometheus/Grafana izleme ve Gemini API finansal analizi.",
+                en: "Cloud-native portfolio service with multi-stage Docker builds, Kubernetes orchestration (Minikube), and GitHub Actions CI/CD. Employs pytest (>70% coverage), Testcontainers, k6 load testing for p95 latency tuning, Prometheus/Grafana metrics, and Gemini API financial insights."
             },
-            tech: ["Python", "AI / ML", "Real-Time Streams", "Data Analysis"],
+            tech: ["FastAPI", "PostgreSQL", "Kubernetes", "Prometheus", "Grafana", "k6"],
             url: "https://github.com/mihsanekinci/real-time-ai-stock-portfolio-monitoring"
         },
         {
-            id: "library-automation-system",
-            repo: "library-automation-system",
-            title: "Library Automation System",
-            category: "web",
+            id: "maya-chatbot",
+            repo: "maya-chatbot",
+            title: "Kurumsal Doküman RAG Destek Asistanı",
+            category: "ai",
             featured: false,
-            badge: "JavaFX & SQLite",
+            badge: "Enterprise RAG / FastAPI",
             description: {
-                tr: "Java, JavaFX (Scene Builder) ve SQLite/JSON kalıcılık katmanı kullanılarak nesne yönelimli mimariyle geliştirilen masaüstü kütüphane yönetim sistemi.",
-                en: "Desktop library management system engineered with Java, JavaFX (Scene Builder), custom stylesheets, and SQLite/JSON persistence."
+                tr: "mayaICT kurumsal web sitesi ve müşteri destek süreçleri için kaynak izlenebilirliği (source traceability) garantili yerel RAG chatbotu. FastAPI, ChromaDB vektör tabanı ve nomic-embed-text ile halüsinasyonsuz, doğrulanabilir kurumsal doküman araması.",
+                en: "Enterprise RAG assistant developed during mayaICT internship providing hallucination-free document retrieval with verified source traceability. Built with FastAPI, ChromaDB vector persistence, and nomic-embed-text."
             },
-            tech: ["Java", "JavaFX", "SQLite", "OOP", "JSON"],
-            url: "https://github.com/mihsanekinci/library-automation-system"
+            tech: ["FastAPI", "ChromaDB", "nomic-embed-text", "RAG", "Docker"],
+            url: "https://github.com/mihsanekinci/maya-chatbot"
         },
         {
-            id: "bmtm",
-            repo: "bmtm",
-            title: "Cloud Architecture Test Engineering",
+            id: "gardirapp",
+            repo: "gardirapp",
+            title: "GardırApp — Hexagonal Mimarili Akıllı Giyim Asistanı",
+            category: "web",
+            featured: true,
+            badge: "Clean Hexagonal / Python",
+            description: {
+                tr: "Ports & Adapters (Hexagonal) mimarisiyle inşa edilmiş akıllı gardırop asistanı. Gemini Vision API ile kıyafet fotoğraflarından kategori ve renk çıkarma; monokromatik ve tamamlayıcı renk teorisine dayalı kombin puanlama motoru, bağlamsal hava durumu eşleme ve dolap rotasyonu (cost-per-wear).",
+                en: "Smart wardrobe and outfit assistant engineered with Clean Hexagonal (Ports & Adapters) architecture. Features automated garment tagging via Gemini Vision API, complementary color theory scoring, context-aware weather matching, and cost-per-wear rotation algorithms."
+            },
+            tech: ["FastAPI", "Clean Architecture", "Gemini Vision", "Pydantic", "Renk Teorisi"],
+            url: "https://github.com/mihsanekinci/gardirapp"
+        },
+        {
+            id: "kesital",
+            repo: "kesital",
+            title: "KesitAl — Video Scrubber & Precision Clipper",
             category: "web",
             featured: false,
-            badge: "Cloud QA / Python",
+            badge: "SOLID / TypeScript",
             description: {
-                tr: "Bulut mimarilerinde mikroservis uç noktalarının ve API sözleşmelerinin güvenilirliğini doğrulamak üzere geliştirilen otomatik test mühendisliği senaryoları.",
-                en: "Automated test engineering suites and contract verification workflows designed for cloud-native microservices and API reliability."
+                tr: "QuickTime tarzı görsel zaman çubuğuna (Scrubber) sahip, YouTube ve web akışlarından milisaniye hassasiyetinde kesit indirme aracı. Katı SOLID prensipleri, modüler TypeScript mimarisi, yt-dlp ve FFmpeg boru hattı ile geliştirildi.",
+                en: "QuickTime-style visual timeline scrubber and millisecond-precision video clipper for YouTube and web streams. Engineered with strict SOLID architecture, modular TypeScript, yt-dlp, and FFmpeg."
             },
-            tech: ["Python", "Cloud Testing", "API Verification", "QA Automation"],
-            url: "https://github.com/mihsanekinci/bmtm"
+            tech: ["TypeScript", "Katı SOLID", "FFmpeg", "yt-dlp", "Node.js"],
+            url: "https://github.com/mihsanekinci/kesital"
+        },
+        {
+            id: "lake-management-system",
+            repo: "lake-management-system",
+            title: "Göl İşletmeciliği Coğrafi Bilgi Sistemi (GIS Web App)",
+            category: "web",
+            featured: false,
+            badge: "PostGIS & GIS / React",
+            description: {
+                tr: "PostgreSQL/PostGIS uzamsal geometri kolonları ve Leaflet (GeoJSON) haritalamasıyla göl bölgesi yönetimi ve canlı tekne filosu takibi yapan full-stack CBS uygulaması; JWT (HS256) ve rol tabanlı erişim kontrolü (RBAC) ile güvenliği sağlandı.",
+                en: "Full-stack GIS application managing lake zones and tracking live boat coordinates using PostgreSQL/PostGIS spatial geometry and Leaflet GeoJSON overlays, secured with JWT and role-based access control (RBAC)."
+            },
+            tech: ["React", "Node.js", "Express", "PostgreSQL", "PostGIS", "Leaflet"],
+            url: "https://github.com/mihsanekinci/lake-management-system"
         }
     ],
 
@@ -591,31 +719,70 @@ export const siteData = {
                 tr: "Programlama & Sistem Dilleri",
                 en: "Programming & Systems Languages"
             },
-            skills: ["C", "Python", "TypeScript", "JavaScript (ES6+)", "C# / .NET", "Java", "SQL"]
+            skills: ["C", "Python", "TypeScript", "JavaScript (ES6+)", "Bash", "SQL", "Java", "C# / .NET"]
         },
         {
             code: "04.2",
             title: {
-                tr: "Ağ & Siber Güvenlik",
-                en: "Network & Cyber Security"
+                tr: "Ağ & Siber Güvenlik Mimarisi",
+                en: "Network & Cyber Security Architecture"
             },
-            skills: ["TCP/IP & OSI", "Network Security", "OWASP Top 10", "Linux Administration", "POSIX Sockets & epoll", "Traffic Analysis"]
+            skills: [
+                "Huawei VRP (eNSP)",
+                "Cisco IOS",
+                "802.1Q VLAN & Trunk",
+                "STP / RSTP",
+                "LACP Eth-Trunk",
+                "OSPF Routing",
+                "Inter-VLAN (Router-on-a-Stick)",
+                "VLSM Subnetting",
+                "ACL & AAA",
+                "Wireshark Paket Analizi",
+                "OWASP Top 10",
+                "Zero Trust & Firewall"
+            ]
         },
         {
             code: "04.3",
             title: {
-                tr: "Yazılım Mimarisi & Web",
-                en: "Software Architecture & Web"
+                tr: "Backend, Bulut & Test Mühendisliği",
+                en: "Backend, Cloud & Test Engineering"
             },
-            skills: ["SOLID Principles", "Clean Architecture", "ASP.NET Core", "RESTful APIs", "Semantic HTML5 & CSS3", "Node.js"]
+            skills: [
+                "FastAPI",
+                "Node.js & Express",
+                "Prisma ORM & Zod",
+                "PostgreSQL & PostGIS",
+                "Docker & Compose",
+                "Kubernetes (Minikube)",
+                "GitHub Actions (CI/CD)",
+                "Prometheus & Grafana",
+                "pytest",
+                "k6 (Load Testing)",
+                "Testcontainers",
+                "LocalStack (AWS S3)"
+            ]
         },
         {
             code: "04.4",
             title: {
-                tr: "Mühendislik Araçları & Ekosistem",
-                en: "Engineering Tools & Ecosystem"
+                tr: "Yapay Zeka, Simülasyon & Mimari",
+                en: "AI, Simulation & Software Architecture"
             },
-            skills: ["Git & GitHub", "Linux / Bash / Zsh", "FFmpeg & yt-dlp", "SQLite", "Cloud Test Automation", "Markdown / Obsidian"]
+            skills: [
+                "RAG & ChromaDB",
+                "Okapi BM25",
+                "Ollama & Gemini API",
+                "PINN (LWR/ARZ Modelleri)",
+                "ST-GNN & PyTorch",
+                "SUMO Mikrosimülasyon",
+                "Clean / Hexagonal Architecture",
+                "Katı SOLID Prensipleri",
+                "CoALA Ajan Mimarisi",
+                "Python AST Analizi",
+                "React & Angular 20",
+                "Three.js & WebGL"
+            ]
         }
     ]
 };

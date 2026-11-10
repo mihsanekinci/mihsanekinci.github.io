@@ -60,6 +60,7 @@ class PortfolioApplication {
         this.themeManager.init();
 
         // 2. İlk senkron bileşen render işlemi (Ethos Grid + Monograph Drawer dahil)
+        this.updateProjectFilterCounts();
         const initialLang = this.localizationManager.getCurrentLanguage();
         this.renderer.renderAll(
             initialLang,
@@ -93,6 +94,28 @@ class PortfolioApplication {
      */
     async init() {
         return this.bootstrap();
+    }
+
+    /**
+     * #projectFilters altındaki kategori sayaçlarını (.filter-count)
+     * siteData.projects verisinden dinamik olarak hesaplar ve günceller.
+     */
+    updateProjectFilterCounts() {
+        const allProjects = Array.isArray(this.data?.projects) ? this.data.projects : [];
+        const counts = {
+            all: allProjects.length,
+            network: allProjects.filter((p) => String(p.category).toLowerCase() === 'network').length,
+            systems: allProjects.filter((p) => String(p.category).toLowerCase() === 'systems').length,
+            web: allProjects.filter((p) => String(p.category).toLowerCase() === 'web').length,
+            ai: allProjects.filter((p) => String(p.category).toLowerCase() === 'ai').length
+        };
+
+        Object.entries(counts).forEach(([cat, count]) => {
+            const countEl = document.querySelector(`#projectFilters [data-filter="${cat}"] .filter-count`);
+            if (countEl) {
+                countEl.textContent = String(count).padStart(2, '0');
+            }
+        });
     }
 
     /**
